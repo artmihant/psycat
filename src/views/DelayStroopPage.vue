@@ -10,15 +10,9 @@
 
         <div v-show="game_status=='init'" class="h-screen justify-center flex flex-col flex-1"> 
             <div class="mt-3 text-center font-bold">
-                <button @click="start_game(1)"
-                    class="rounded-lg border p-2 border-neutral-700 bg-white text-neutral-900"
-                >Тест {{ 1 }} уровня</button>
-            </div>
-
-            <div class="mt-3 text-center font-bold">
                 <button @click="start_game(2)"
                     class="rounded-lg border p-2 border-neutral-700 bg-white text-neutral-900"
-                >Тест {{ 2 }} уровня</button>
+                >Начать отложенный тест Струпа</button>
             </div>
         </div>
 

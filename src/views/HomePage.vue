@@ -33,7 +33,7 @@
                 <li><RouterLink to="ishihara">Тест Ишихары</RouterLink></li>
                 <li><RouterLink to="stroop">Тест Струпа</RouterLink></li>
                 <li><RouterLink to="delaystroop">Отложенный тест Струпа</RouterLink></li>                
-                <li><RouterLink to="cat">Наш эксперимент</RouterLink></li>
+                <!-- <li><RouterLink to="cat">Тест цветовой реакции</RouterLink></li> -->
             </ul>
         </div>
     </div>

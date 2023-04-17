@@ -48,7 +48,7 @@
                     <th class="pr-3 border text-center">направление</th>
                     <th class="pr-3 border text-center">реакция</th>
                 </tr>
-                <template v-for="result, index in results_pool.slice(level-1)">
+                <template v-for="result, index in results_pool.slice(level-1,-1)">
                 <tr>
                     <td class="pr-3 border">{{index+1}} {{result.correctly ? '✔️' : '❌'}}</td>
 
@@ -112,38 +112,39 @@ const level = ref(1)
 
 const pallete = [
     {title: 'красный', color:'#f5222d'}, //0
-    // {title: 'оранжевый', color:'#fa8c16'}, //1
-    // {title: 'желтый', color: '#fadb14'}, //2
+    {title: 'оранжевый', color:'#fa8c16'}, //1
+    {title: 'желтый', color: '#fadb14'}, //2
     {title: 'зеленый', color:'#52c41a'}, //3
     {title: 'синий', color:'#1890ff'}, //4
-    // {title: 'фиолетовый', color:'#722ed1'}, //5
+    {title: 'фиолетовый', color:'#722ed1'}, //5
 ]
 
 const stimulus_seq = [
-         {'first_color': 2, 'second_color': 1, 'congruents': 0, 'direction': 1} ,
-         {'first_color': 1, 'second_color': 0, 'congruents': 0, 'direction': 0} ,
-         {'first_color': 2, 'second_color': 1, 'congruents': 0, 'direction': 0} ,
-         {'first_color': 1, 'second_color': 2, 'congruents': 0, 'direction': 1} ,
-         {'first_color': 0, 'second_color': 1, 'congruents': 1, 'direction': 0} ,
-         {'first_color': 0, 'second_color': 2, 'congruents': 0, 'direction': 0} ,
-         {'first_color': 1, 'second_color': 2, 'congruents': 1, 'direction': 0} ,
-         {'first_color': 0, 'second_color': 1, 'congruents': 0, 'direction': 0} ,
-         {'first_color': 1, 'second_color': 0, 'congruents': 1, 'direction': 1} ,
-         {'first_color': 1, 'second_color': 2, 'congruents': 1, 'direction': 1} ,
-         {'first_color': 1, 'second_color': 2, 'congruents': 0, 'direction': 0} ,
-         {'first_color': 0, 'second_color': 2, 'congruents': 1, 'direction': 1} ,
-         {'first_color': 0, 'second_color': 2, 'congruents': 0, 'direction': 1} ,
-         {'first_color': 0, 'second_color': 1, 'congruents': 0, 'direction': 1} ,
-         {'first_color': 2, 'second_color': 0, 'congruents': 0, 'direction': 1} ,
-         {'first_color': 1, 'second_color': 0, 'congruents': 1, 'direction': 0} ,
-         {'first_color': 2, 'second_color': 1, 'congruents': 1, 'direction': 0} ,
-         {'first_color': 2, 'second_color': 0, 'congruents': 1, 'direction': 0} ,
-         {'first_color': 2, 'second_color': 0, 'congruents': 1, 'direction': 1} ,
-         {'first_color': 2, 'second_color': 0, 'congruents': 0, 'direction': 0} ,
-         {'first_color': 1, 'second_color': 0, 'congruents': 0, 'direction': 1} ,
-         {'first_color': 2, 'second_color': 1, 'congruents': 1, 'direction': 1} ,
-         {'first_color': 0, 'second_color': 2, 'congruents': 1, 'direction': 0} ,
-         {'first_color': 0, 'second_color': 1, 'congruents': 1, 'direction': 1} ,
+    {'first_color': 2, 'second_color': 1, 'congruents': 1, 'direction': 0},
+    {'first_color': 2, 'second_color': 3, 'congruents': 1, 'direction': 0},
+    {'first_color': 5, 'second_color': 4, 'congruents': 0, 'direction': 0},
+    {'first_color': 3, 'second_color': 4, 'congruents': 0, 'direction': 0},
+    {'first_color': 5, 'second_color': 1, 'congruents': 1, 'direction': 0},
+    {'first_color': 3, 'second_color': 5, 'congruents': 1, 'direction': 0},
+    {'first_color': 0, 'second_color': 3, 'congruents': 1, 'direction': 0},
+    {'first_color': 5, 'second_color': 1, 'congruents': 1, 'direction': 0},
+    {'first_color': 5, 'second_color': 3, 'congruents': 0, 'direction': 1},
+    {'first_color': 2, 'second_color': 1, 'congruents': 0, 'direction': 1},
+    {'first_color': 4, 'second_color': 3, 'congruents': 0, 'direction': 0},
+    {'first_color': 2, 'second_color': 3, 'congruents': 0, 'direction': 0},
+    {'first_color': 3, 'second_color': 2, 'congruents': 0, 'direction': 1},
+    {'first_color': 5, 'second_color': 3, 'congruents': 1, 'direction': 0},
+    {'first_color': 2, 'second_color': 3, 'congruents': 1, 'direction': 0},
+    {'first_color': 3, 'second_color': 4, 'congruents': 1, 'direction': 0},
+    {'first_color': 2, 'second_color': 5, 'congruents': 1, 'direction': 0},
+    {'first_color': 0, 'second_color': 4, 'congruents': 1, 'direction': 1},
+    {'first_color': 5, 'second_color': 1, 'congruents': 0, 'direction': 0},
+    {'first_color': 0, 'second_color': 5, 'congruents': 1, 'direction': 1},
+    {'first_color': 0, 'second_color': 3, 'congruents': 0, 'direction': 0},
+    {'first_color': 3, 'second_color': 0, 'congruents': 1, 'direction': 0},
+    {'first_color': 2, 'second_color': 1, 'congruents': 1, 'direction': 0},
+    {'first_color': 5, 'second_color': 4, 'congruents': 0, 'direction': 0},
+    {'first_color': 2, 'second_color': 0, 'congruents': 1, 'direction': 0},
 ]
 const score = computed(() => {
     let left = 0
@@ -254,7 +255,10 @@ let turn = () => {
 
         let timer = Date.now();
 
-        let current_stimulus = stimulus_seq[tests_passed]
+        
+        let current_stimulus = generate_random_stimulus()
+
+        // let current_stimulus = stimulus_seq[tests_passed]
 
         results_pool.push(current_stimulus)
 

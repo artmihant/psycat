@@ -1,0 +1,3 @@
+<template>
+    наше тест
+</template>

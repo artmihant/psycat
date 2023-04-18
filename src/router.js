@@ -1,45 +1,50 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory,createWebHashHistory } from 'vue-router'
 
 const routes = [
     {
         path: '/',
         name: 'home',
-        component: () => import('./views/HomePage.vue'),
+        component: () => import('./pages/HomePage.vue'),
     },
     {
         path: '/anketa',
         name: 'anketa',
-        component: () => import('./views/AnketaPage.vue'),
+        component: () => import('./pages/AnketaPage.vue'),
+    },
+    {
+        path: '/testfirebase',
+        name: 'testfirebase',
+        component: () => import('./pages/TestFireBasePage.vue'),
     },
     {
         path: '/annet',
         name: 'annet',
-        component: () => import('./views/AnnetPage.vue'),
+        component: () => import('./pages/AnnetPage.vue'),
     },
     {
         path: '/ishihara',
         name: 'ishihara',
-        component: () => import('./views/IshiharaPage.vue'),
+        component: () => import('./pages/IshiharaPage.vue'),
     },
     {
         path: '/stroop',
         name: 'stroop',
-        component: () => import('./views/StroopPage.vue'),
+        component: () => import('./pages/StroopPage.vue'),
     },
     {
         path: '/delaystroop',
         name: 'delaystroop',
-        component: () => import('./views/DelayStroopPage.vue'),
+        component: () => import('./pages/DelayStroopPage.vue'),
     },
     {
         path: '/cat',
         name: 'cat',
-        component: () => import('./views/CatPage.vue'),
+        component: () => import('./pages/CatPage.vue'),
     },
 ]
 
 const router = createRouter({
-    history: createWebHistory(import.meta.env.BASE_URL),
+    history: createWebHashHistory(),
     routes
 })
 

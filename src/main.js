@@ -4,8 +4,8 @@ import App from './App.vue'
 import './index.css'
 import router from './router'
 
-const app = createApp(App)
+const vue_app = createApp(App)
 
-app.use(router)
+vue_app.use(router)
 
-app.mount('#app')
+vue_app.mount('#app')

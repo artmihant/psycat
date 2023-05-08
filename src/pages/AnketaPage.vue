@@ -28,19 +28,19 @@
                 <legend class="text-lg">Образование</legend>
                 <div>
                     <input class="form-radio" type="radio" v-model="anketa.education" value="lower" name="education">
-                    <span class="ml-2">Основное общее (9 классов)</span>
+                    <span class="ml-2">Основное общее</span>
                 </div>
                 <div>
                     <input class="form-radio" type="radio" v-model="anketa.education" value="middle" name="education">
-                    <span class="ml-2">Среднее общее (11 классов)</span>
+                    <span class="ml-2">Среднее общее</span>
                 </div>
                 <div>
                     <input class="form-radio" type="radio" v-model="anketa.education" value="college" name="education">
-                    <span class="ml-2">Среднее специальное (Колледж)</span>
+                    <span class="ml-2">Среднее специальное</span>
                 </div>
                 <div>
                     <input class="form-radio" type="radio" v-model="anketa.education" value="half" name="education">
-                    <span class="ml-2">Неоконченное высшее (3 курса включительно и выше)</span>
+                    <span class="ml-2">Неоконченное высшее</span>
                 </div>
                 <div>
                     <input class="form-radio" type="radio" v-model="anketa.education" value="higher" name="education">
@@ -87,7 +87,7 @@
 
 
             <fieldset class="block border border-neutral-400 border-dashed p-2">
-                <legend class="text-lg">Есть ли у Вас какие-то зрительные заболевания?</legend>
+                <legend class="text-lg">Есть ли у вас офтальмологические диагнозы?</legend>
                 <div>
                     <input class="border-0 border-b"  type="text" v-model="anketa.visual_diseases" name="visual_diseases" placeholder="Близорукость, астигматизм и.т.п." >
                 </div>
@@ -95,7 +95,7 @@
             </fieldset>
 
             <fieldset class="block border border-neutral-400 border-dashed p-2">
-                <legend class="text-lg">Email</legend>
+                <legend class="text-lg">Email для обратной связи</legend>
                 <p>Мы вышлем вам на него результаты тестирования.</p>
                 <input class="border-0 border-b" type="email" placeholder="Заполняйте по желанию" v-model="anketa.email">
             </fieldset>

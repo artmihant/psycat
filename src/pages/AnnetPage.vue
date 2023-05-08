@@ -2,7 +2,7 @@
     <div class="flex justify-center">  
 
 <div class="mx-12 py-12 max-w-[600px]">
-    <h2> Тест на левшизм (опросник Аннет) </h2>
+    <h2> Опрос Аннет </h2>
 
     <form class="my-8 grid grid-cols-1 md:grid-cols-1 gap-6 items-start">
         <div class="grid grid-cols-1 gap-6"> 
@@ -309,7 +309,7 @@
 
 
             <fieldset class="block border border-neutral-400 border-dashed p-2">
-                <p class="text-lg">Какой рукой вы держите щетку, когда подметаете пол?</p>
+                <p class="text-lg">Какой рукой вы подметаете пол?</p>
 
                 <div>
                     <input class="form-radio" type="radio" value="right" v-model="annet.annet18" name="annet18">

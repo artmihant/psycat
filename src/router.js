@@ -37,9 +37,9 @@ const routes = [
         component: () => import('./pages/DelayStroopPage.vue'),
     },
     {
-        path: '/cat',
-        name: 'cat',
-        component: () => import('./pages/CatPage.vue'),
+        path: '/gilbert',
+        name: 'gilbert',
+        component: () => import('./pages/GilbertPage.vue'),
     },
 ]
 

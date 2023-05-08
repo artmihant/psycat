@@ -1,19 +1,23 @@
 <template>
 
     <div class="h-screen flex w-full justify-center">
-        <div v-show="game_status=='play' && left_block.vision" 
-        class="lg:w-40 md:w-24 sm:w-16 w-12 "
+        <div v-show="game_status=='play' && left_block.vision && false" 
+            class="lg:w-40 md:w-24 sm:w-16 w-12 "
 
-        :style="{
-            'background-color':left_block.color,
-            }">
+            :style="{
+                'background-color':left_block.color,
+                }">
         </div> 
 
         <div v-show="game_status=='init'" class="h-screen justify-center flex flex-col flex-1"> 
-            <div class="mt-3 text-center font-bold">
-                <button @click="start_game(1)"
+            <div class="mt-3 text-center">
+                <p> В следующем тесте вам будут показывать слова, обозначающие цвета.</p>
+                <p> Если слово и его цвет совпадают, нажмите стрелку <b>влево</b></p>
+                <p> Если слово и его цвет различаются, нажмите стрелку <b>вправо</b></p>
+                <p> Постарайтесь выполнить тест как можно быстрее и без ошибок.</p>
+                <button @click="start_game()"
                     class="rounded-lg border p-2 border-neutral-700 bg-white text-neutral-900"
-                >Начать тест Струпа</button>
+                >Начать тест</button>
             </div>
         </div>
 
@@ -26,20 +30,20 @@
             >{{center_block.title.toUpperCase()}}</div>
         </div>
 
-        <div  v-show="game_status=='play' && right_block.vision"  
-        class="lg:w-40 md:w-24 sm:w-16 w-12"
-        :style="{
-            'background-color':right_block.color,
-        }">
+        <div  v-show="game_status=='play' && right_block.vision && false"  
+            class="lg:w-40 md:w-24 sm:w-16 w-12"
+            :style="{
+                'background-color':right_block.color,
+            }">
         </div>
 
         <div v-show="game_status=='prepare'" class="h-screen justify-center flex flex-col flex-0">
             <h1> Приготовьтесь... </h1>
-            <div>(нажмите любую клавишу)</div>
+            <p>(нажмите любую клавишу)</p>
         </div>
 
         <div v-show="game_status=='score'" class="h-screen justify-center flex flex-col flex-0"> 
-            <h1> Итоговый счет (уровень {{ level }}) </h1>
+            <h1> Итоговый счет </h1>
             <table class="border border-neutral-700 ">
                 <tr>
                     <th class="pr-3 border"></th>
@@ -49,7 +53,7 @@
                     <th class="pr-3 border text-center">направление</th>
                     <th class="pr-3 border text-center">реакция</th>
                 </tr>
-                <template v-for="result, index in results_pool.slice(level-1)">
+                <template v-for="result, index in results_pool">
                 <tr>
                     <td class="pr-3 border">{{index+1}} {{result.correctly ? '✔️' : '❌'}}</td>
 
@@ -80,18 +84,16 @@
             </table>
 
             <div class="mt-3 text-center font-bold">
-                <button @click="start_game(1)"
+                <!-- <button @click="start_game()"
                     class="rounded-lg border p-2 border-neutral-700 bg-white text-neutral-900"
-                >Тест {{ 1 }} уровня</button>
-            </div>
+                >Попробовать ещё раз</button> -->
+                <router-link to="gilbert">
+                    <button class="rounded-lg border p-2 border-neutral-700 bg-white text-neutral-900">
+                        Далее
+                    </button>
+                </router-link>
 
-            <div class="mt-3 text-center font-bold">
-                <button @click="start_game(2)"
-                    class="rounded-lg border p-2 border-neutral-700 bg-white text-neutral-900"
-                >Тест {{ 2 }} уровня</button>
             </div>
-
-            <div> {{ score.left }} | {{score.right}}</div>
         </div>
 
     </div>
@@ -100,16 +102,18 @@
 
 
 <script setup>
+import { useDocument, useCollection} from 'vuefire'
+import {collection, doc, getDoc, addDoc, updateDoc} from 'firebase/firestore'
+import {inject, ref, reactive, computed} from 'vue'
 
-import {ref, reactive, computed} from 'vue'
+import {db} from '../firebase.js'
+const uid = inject('uid')
 
 function randomInt(max) {
     return Math.floor(Math.random() * max);
 }
 
 const game_status = ref('init')
-
-const level = ref(1)
 
 const pallete = [
     {title: 'красный', color:'#f5222d'}, //0
@@ -122,55 +126,48 @@ const pallete = [
 
 const stimulus_seq = [
          {'first_color': 2, 'second_color': 1, 'congruents': 0, 'direction': 1} ,
-         {'first_color': 1, 'second_color': 0, 'congruents': 0, 'direction': 0} ,
-         {'first_color': 2, 'second_color': 1, 'congruents': 0, 'direction': 0} ,
+         {'first_color': 1, 'second_color': 0, 'congruents': 0, 'direction': 1} ,
+         {'first_color': 2, 'second_color': 1, 'congruents': 0, 'direction': 1} ,
          {'first_color': 1, 'second_color': 2, 'congruents': 0, 'direction': 1} ,
          {'first_color': 0, 'second_color': 1, 'congruents': 1, 'direction': 0} ,
-         {'first_color': 0, 'second_color': 2, 'congruents': 0, 'direction': 0} ,
+         {'first_color': 0, 'second_color': 2, 'congruents': 0, 'direction': 1} ,
          {'first_color': 1, 'second_color': 2, 'congruents': 1, 'direction': 0} ,
-         {'first_color': 0, 'second_color': 1, 'congruents': 0, 'direction': 0} ,
-         {'first_color': 1, 'second_color': 0, 'congruents': 1, 'direction': 1} ,
-         {'first_color': 1, 'second_color': 2, 'congruents': 1, 'direction': 1} ,
-         {'first_color': 1, 'second_color': 2, 'congruents': 0, 'direction': 0} ,
-         {'first_color': 0, 'second_color': 2, 'congruents': 1, 'direction': 1} ,
+         {'first_color': 0, 'second_color': 1, 'congruents': 0, 'direction': 1} ,
+         {'first_color': 1, 'second_color': 0, 'congruents': 1, 'direction': 0} ,
+         {'first_color': 1, 'second_color': 2, 'congruents': 1, 'direction': 0} ,
+         {'first_color': 1, 'second_color': 2, 'congruents': 0, 'direction': 1} ,
+         {'first_color': 0, 'second_color': 2, 'congruents': 1, 'direction': 0} ,
          {'first_color': 0, 'second_color': 2, 'congruents': 0, 'direction': 1} ,
          {'first_color': 0, 'second_color': 1, 'congruents': 0, 'direction': 1} ,
          {'first_color': 2, 'second_color': 0, 'congruents': 0, 'direction': 1} ,
          {'first_color': 1, 'second_color': 0, 'congruents': 1, 'direction': 0} ,
          {'first_color': 2, 'second_color': 1, 'congruents': 1, 'direction': 0} ,
          {'first_color': 2, 'second_color': 0, 'congruents': 1, 'direction': 0} ,
-         {'first_color': 2, 'second_color': 0, 'congruents': 1, 'direction': 1} ,
-         {'first_color': 2, 'second_color': 0, 'congruents': 0, 'direction': 0} ,
+         {'first_color': 2, 'second_color': 0, 'congruents': 1, 'direction': 0} ,
+         {'first_color': 2, 'second_color': 0, 'congruents': 0, 'direction': 1} ,
          {'first_color': 1, 'second_color': 0, 'congruents': 0, 'direction': 1} ,
-         {'first_color': 2, 'second_color': 1, 'congruents': 1, 'direction': 1} ,
+         {'first_color': 2, 'second_color': 1, 'congruents': 1, 'direction': 0} ,
          {'first_color': 0, 'second_color': 2, 'congruents': 1, 'direction': 0} ,
-         {'first_color': 0, 'second_color': 1, 'congruents': 1, 'direction': 1} ,
+         {'first_color': 0, 'second_color': 1, 'congruents': 1, 'direction': 0} ,
 ]
+
+stimulus_seq.sort(() => Math.random() - 0.5)
+
+
+
 const score = computed(() => {
     let left = 0
     let right = 0
 
-    if(level.value == 1){
-        results_pool.slice(1,-1).forEach((stimulus) => {
-            if(stimulus.direction){
+    results_pool.slice(1,-1).forEach((stimulus) => {
+        if(stimulus.direction){
             right += stimulus.reaction_time
-            }else{
-                left += stimulus.reaction_time
-            }
-        })
-    }else{
-        results_pool.slice(2,-1).forEach((stimulus) => {
-            if(stimulus.direction){
-            right += stimulus.reaction_time
-            }else{
-                left += stimulus.reaction_time
-            }
-        })
-    }
-
+        }else{
+            left += stimulus.reaction_time
+        }
+    })
     
     return {left, right}
-
 })
 
 let offset = ref(0)
@@ -201,7 +198,6 @@ let tests_passed = 0
 
 let max_reaction_time = computed(() => {
     return 10000000
-    return 2000*level.value*level.value
 })
 
 let keyup = () => {
@@ -209,7 +205,7 @@ let keyup = () => {
     turn()
 }
 
-let start_game = (l) =>{
+let start_game = () =>{
 
     document.removeEventListener("keyup", start_game);
 
@@ -217,12 +213,9 @@ let start_game = (l) =>{
     while(results_pool.length > 0) {
         results_pool.pop();
     }
-    level.value = l
     game_status.value = 'prepare'
     document.addEventListener("keyup", keyup);
 }
-
-// document.addEventListener("keyup", () => start_game(level.value));
 
 let generate_random_stimulus = () => {
     let first_color = 0
@@ -243,7 +236,6 @@ let generate_random_stimulus = () => {
         direction
     }
 
-
     return stimulus
 }
 
@@ -259,7 +251,7 @@ let turn = () => {
 
         results_pool.push(current_stimulus)
 
-        let actual_stimulus_index = results_pool.length - level.value
+        let actual_stimulus_index = results_pool.length - 1
         let actual_stimulus = actual_stimulus_index >= 0 ? results_pool[actual_stimulus_index] : null
 
 
@@ -294,6 +286,7 @@ let turn = () => {
                 center_block.title = pallete[current_stimulus.second_color].title
                 center_block.color = pallete[current_stimulus.first_color].color
             }
+
             center_block.vision = true
             right_block.vision = false
             left_block.vision = false
@@ -302,10 +295,10 @@ let turn = () => {
         let keydown = (e) => {
 
             let direction 
-            if(e.code == 'ArrowLeft' || e.code == 'KeyA'){
+            if(e.code == 'ArrowLeft' || e.code == 'KeyA'|| e.code == 'KeyQ'){
                 direction = 0
             }
-            else if(e.code == 'ArrowRight' || e.code == 'KeyD'){
+            else if(e.code == 'ArrowRight' || e.code == 'KeyD'|| e.code == 'KeyP'){
                 direction = 1
             }else{
                 return
@@ -337,10 +330,11 @@ let turn = () => {
         document.addEventListener("keydown", keydown);
     }
     else{
+
+        updateDoc(doc(db, 'users', uid), {stroop:results_pool})
+
         game_status.value = 'score'
     }
-
-
 }
 
 

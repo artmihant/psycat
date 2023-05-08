@@ -69,12 +69,21 @@
 </template>
 
 <script setup>
+import { useDocument, useCollection} from 'vuefire'
+import {collection, doc, getDoc, addDoc, updateDoc} from 'firebase/firestore'
 
-import {computed, ref} from "vue";
+import {inject, computed, ref} from "vue";
+import {db} from '../firebase.js'
+
 import LinkButton from '../components/LinkButton.vue';
 const numberbuttons = [
     1,2,3,4,5,6,7,8,9
 ]
+
+const uid = inject('uid')
+
+const user = (await getDoc(doc(db, 'users', uid))).data()
+
 
 const images = ref([
     {src: "8-dark", value: 8},
@@ -104,8 +113,6 @@ const images = ref([
 
 images.value.sort(() => Math.random() - 0.5)
 
-console.log(images.value)
-
 const showTable = ref(false)
 
 const numberOfQuestions = images.value.length
@@ -121,7 +128,7 @@ function takeAnswer(e) {
     images.value.splice(0, 1)
     if (images.value.length === 0) {
 
-        
+        updateDoc(doc(db, 'users', uid), {ishihara:answers.value})
 
         showTable.value = true
     }

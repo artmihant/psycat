@@ -24,11 +24,11 @@ const create_user = async () => {
 let uid = window.localStorage.getItem('uid')
 
 if(!uid){
-    userSnap = create_user()
+    userSnap = await create_user()
 }else{
     userSnap = await getDoc(doc(db, 'users', uid))
     if (!userSnap.exists()){
-        userSnap = create_user()
+        userSnap = await create_user()
     }
 }
 
@@ -36,10 +36,6 @@ uid = userSnap.id
 
 // let userData = userSnap.data()
 // let userRef = doc(db, 'users', uid)
-
-// console.log(userRef,userSnap,userData )
-
-console.log(uid)
 
 provide('uid', uid)
 

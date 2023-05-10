@@ -146,7 +146,7 @@ const pallete = {
 
 
 const colors = [
-    '#ff0000','#ff4400','#ff6f00',
+    '#ff1100','#ff4400','#ff5f00',
     '#6bff00','#a1ff00','#d7ff00',
     '#0051ff','#0081ff','#00bcff'
 ]
@@ -179,9 +179,6 @@ const crosson = ref(false)
 let tests_count = 21
 let tests_passed = 0
 let rounds_count = 6
-
-
-
 
 const directions = Array((tests_count-1)/2).fill(0).concat(Array((tests_count-1)/2).fill(1)) 
 
@@ -247,7 +244,7 @@ let keyup = () => {
 
 
 let start_game = () =>{
-
+    document.documentElement.requestFullscreen();
     document.removeEventListener("keyup", start_game);
 
     tests_passed = 0

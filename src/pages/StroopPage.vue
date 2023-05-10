@@ -230,7 +230,7 @@ let keyup = () => {
 }
 
 let start_game = () =>{
-
+    document.documentElement.requestFullscreen();
     document.removeEventListener("keyup", start_game);
 
     tests_passed = 0

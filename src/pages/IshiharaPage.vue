@@ -43,6 +43,7 @@
             </div>
         </div>
         <div v-show="showTable">
+            <h1>Тест Ишихары - результаты</h1>
             <table class="border border-neutral-700">
                 <tr class="bg-neutral-200 border-neutral-700">
                     <th class="pr-3 border border-neutral-700">id</th>
@@ -57,9 +58,16 @@
                    <td class="pr-3 border border-neutral-700 text-center">{{answer.userAnswer == answer.value ? '✔' : '❌'}}</td>
                 </tr>
             </table>
-            <div class="mt-3 text-center font-bold">
-                <LinkButton to="stroop" >Далее</LinkButton>
-            </div>
+            <template v-if="user.stroop">
+                <div class="mt-3 text-center font-bold">
+                    <LinkButton to="stroop" >Далее</LinkButton>
+                </div>
+            </template>
+            <template v-else>
+                <div class="mt-3 text-center font-bold">
+                    <LinkButton to="strooptraining" >Далее</LinkButton>
+                </div>
+            </template>
 
         </div>
 
@@ -69,10 +77,10 @@
 </template>
 
 <script setup>
-import { useDocument, useCollection} from 'vuefire'
-import {collection, doc, getDoc, addDoc, updateDoc} from 'firebase/firestore'
 
-import {inject, computed, ref} from "vue";
+import {doc, getDoc, updateDoc} from 'firebase/firestore'
+
+import {inject, computed, ref,reactive} from "vue";
 import {db} from '../firebase.js'
 
 import LinkButton from '../components/LinkButton.vue';
@@ -115,8 +123,14 @@ images.value.sort(() => Math.random() - 0.5)
 
 const showTable = ref(false)
 
+const answers = reactive(user.ishihara ? user.ishihara : [])
+
+if(answers.length){
+    showTable.value = true
+}
+
 const numberOfQuestions = images.value.length
-const answers = ref([])
+
 
 const actualPicture = computed(() => {
     return images.value[0] ? images.value[0] : ''
@@ -124,11 +138,11 @@ const actualPicture = computed(() => {
 
 
 function takeAnswer(e) {
-    answers.value.push({...actualPicture.value, userAnswer: e.target.innerText})
+    answers.push({...actualPicture.value, userAnswer: e.target.innerText})
     images.value.splice(0, 1)
     if (images.value.length === 0) {
 
-        updateDoc(doc(db, 'users', uid), {ishihara:answers.value})
+        updateDoc(doc(db, 'users', uid), {ishihara:answers})
 
         showTable.value = true
     }

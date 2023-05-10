@@ -60,12 +60,12 @@
                 <p>Сейчас на экране появится 12 квадратов.</p>
                 <p>Цвет одного отличается от цвета остальных.</p>
                 <p>Нужно как можно быстрее определить, в какой части экрана (правой или левой).
-                    от центра расположен этот квадрат, <br/> нажав клавишу <b>Q</b> (слева) или <b>P</b> (справа)</p>
+                    от центра расположен этот квадрат, <br/>нажав клавишу <b>Q</b> (слева) или <b>P</b> (справа)</p>
 
                 <div class="text-center">
                     <button @click="start_game"
                         class="rounded-lg border p-2 border-neutral-700 bg-white text-neutral-900"
-                    >Начать тест</button>
+                    >Начать тренировочный тест</button>
                 </div>
             </div>
         </div>
@@ -78,9 +78,9 @@
     </div>
     <div v-show="game_status=='score'"  class="h-screen flex w-full justify-center">
 
-        <div class="h-screen justify-center flex flex-0 gap-10"> 
-            <h2 class="mt-48"> Итоговый счет </h2>
-
+        <div class="h-screen justify-center flex flex-col flex-0"> 
+        
+            <h1> Итоговый счет </h1>
             <table class="border border-neutral-700 ">
                 <tr>
                     <th class="pr-3 border"></th>
@@ -99,17 +99,32 @@
             </table>
 
 
-            <div class="mt-48 text-center font-bold">
-                <router-link to="thanks">
+            <div class="text-center"> Тренировка {{success ? 'пройдена' : 'не пройдена' }}! </div>
+            <div class="mt-3 text-center font-bold">
+                <template v-if="success">
+                <router-link to="gilbert">
                     <button class="rounded-lg border p-2 border-neutral-700 bg-white text-neutral-900">
-                        Далее
+                        Начать тест
                     </button>
                 </router-link>
+
+            </template>
+            <template v-else>
+                <button @click="start_game"
+                class="rounded-lg border p-2 border-neutral-700 bg-white text-neutral-900"
+                >Попробовать ещё раз</button>
+            </template>
+
             </div>
 
-
         </div>
+        <!-- <div class="mt-3 text-center font-bold">
+            <button @click="start_game(2)"
+                class="rounded-lg border p-2 border-neutral-700 bg-white text-neutral-900"
+            >Тест {{ 2 }} уровня</button>
+        </div> -->
 
+        <!-- <div> {{ score.left }} | {{score.right}}</div> -->
     </div>
 
 
@@ -129,7 +144,6 @@ import {collection, doc, getDoc, addDoc, updateDoc} from 'firebase/firestore'
 import {db} from '../firebase.js'
 
 const uid = inject('uid')
-const user = (await getDoc(doc(db, 'users', uid))).data()
 
 const sq_count = 12
 
@@ -142,13 +156,8 @@ const pallete = {
     B:'#000000',
 }
 
-
-
-
 const colors = [
-    '#ff0000','#ff4400','#ff6f00',
-    '#6bff00','#a1ff00','#d7ff00',
-    '#0051ff','#0081ff','#00bcff'
+    '#ff0000','#ff8f00','#d7ff00','#6bff00'
 ]
 
 const game_status = ref('init')
@@ -168,30 +177,17 @@ for(let i=0;i<sq_count;i++){
 const color_pairs = [
     [0,1],
     [2,1],
-    [3,4],
-    [5,4],
-    [6,7],
-    [8,7],
+    [2,3],
 ]
 
 const crosson = ref(false)
 
-let tests_count = 21
+let tests_count = 2
 let tests_passed = 0
-let rounds_count = 6
+let rounds_count = 3
 
+const results_pool = reactive([])
 
-
-
-const directions = Array((tests_count-1)/2).fill(0).concat(Array((tests_count-1)/2).fill(1)) 
-
-const results_pool = reactive(user.gilbert ? user.gilbert : [])
-
-// const results_pool = reactive([])
-
-if(results_pool.length){
-    game_status.value = 'score'
-}
 
 const success = computed(() => {
     let correctly = true
@@ -203,16 +199,8 @@ const success = computed(() => {
     return correctly
 })
 
-let generate_random_stimulus = (tests_passed) => {
-    let direction
-    if(tests_passed%tests_count == 0){
-        direction = randomInt(2)
-        directions.sort(() => Math.random() - 0.5)
-    }else{
-        direction = directions[tests_passed%tests_count-1]
-    }
-    
-    randomInt(2)
+let generate_random_stimulus = () => {
+    let direction = randomInt(2)
 
     let position = randomInt(6)
 
@@ -240,6 +228,7 @@ let keyup = () => {
         sqartes[i].color = pallete.N
     } 
     crosson.value = false
+    game_status.value = 'play'
 
     document.removeEventListener("keyup", keyup);
     turn()
@@ -261,7 +250,7 @@ let start_game = () =>{
 let turn = () => {
 
     if(tests_passed < tests_count*rounds_count){
-        game_status.value = 'play'
+
         setTimeout(() =>{
             crosson.value = true 
             setTimeout(() =>{
@@ -270,7 +259,7 @@ let turn = () => {
 
                 let timer = Date.now();
 
-                let current_stimulus = generate_random_stimulus(tests_passed)
+                let current_stimulus = generate_random_stimulus()
 
                 results_pool.push(current_stimulus)
 
@@ -312,7 +301,8 @@ let turn = () => {
 
     }
     else{
-        updateDoc(doc(db, 'users', uid), {gilbert:results_pool})
+        // updateDoc(doc(db, 'users', uid), {gilbert:results_pool})
+        console.log('ura')
         game_status.value = 'score'
     }
 }

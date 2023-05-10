@@ -12,11 +12,6 @@ const routes = [
         component: () => import('./pages/AnketaPage.vue'),
     },
     {
-        path: '/testfirebase',
-        name: 'testfirebase',
-        component: () => import('./pages/TestFireBasePage.vue'),
-    },
-    {
         path: '/annet',
         name: 'annet',
         component: () => import('./pages/AnnetPage.vue'),
@@ -32,15 +27,31 @@ const routes = [
         component: () => import('./pages/StroopPage.vue'),
     },
     {
+        path: '/strooptraining',
+        name: 'strooptraining',
+        component: () => import('./pages/StroopTrainingPage.vue'),
+    },
+    {
         path: '/delaystroop',
         name: 'delaystroop',
         component: () => import('./pages/DelayStroopPage.vue'),
+    },
+    {
+        path: '/gilberttraining',
+        name: 'gilberttraining',
+        component: () => import('./pages/GilbertTrainingPage.vue'),
     },
     {
         path: '/gilbert',
         name: 'gilbert',
         component: () => import('./pages/GilbertPage.vue'),
     },
+    {
+        path: '/thanks',
+        name: 'thanks',
+        component: () => import('./pages/ThanksPage.vue'),
+    },
+
 ]
 
 const router = createRouter({

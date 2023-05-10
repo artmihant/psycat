@@ -23,12 +23,12 @@
                 <span class="text-green-600 font-bold">синий</span> — вправо ►
                 </p>
 
-                <p> <b>Постарайтесь выполнить тест как можно быстрее и без ошибок.</b></p>
+                <p> Постарайтесь выполнить тест как можно быстрее и без ошибок.</p>
 
 
-                <button @click="start_game"
+                <button @click="start_game()"
                     class="rounded-lg border p-2 border-neutral-700 bg-white text-neutral-900"
-                >Начать тест</button>
+                >Начать тренировочный тест</button>
             </div>
         </div>
 
@@ -94,14 +94,22 @@
                 </template>
             </table>
 
+            <div class="text-center"> Тренировка {{success ? 'пройдена' : 'не пройдена' }}! </div>
+
             <div class="mt-3 text-center font-bold">
-                <template v-if="user.gilbert">
-                    <LinkButton to="gilbert" >Далее</LinkButton>
+                
+                <template v-if="success">
+                    <router-link to="stroop">
+                        <button class="rounded-lg border p-2 border-neutral-700 bg-white text-neutral-900">
+                            Начать тест
+                        </button>
+                    </router-link>
+
                 </template>
                 <template v-else>
-                    <div class="mt-3 text-center font-bold">
-                        <LinkButton to="gilberttraining" >Далее</LinkButton>
-                    </div>
+                    <button @click="start_game"
+                    class="rounded-lg border p-2 border-neutral-700 bg-white text-neutral-900"
+                    >Попробовать ещё раз</button>
                 </template>
             </div>
         </div>
@@ -115,12 +123,9 @@
 import { useDocument, useCollection} from 'vuefire'
 import {collection, doc, getDoc, addDoc, updateDoc} from 'firebase/firestore'
 import {inject, ref, reactive, computed} from 'vue'
-import LinkButton from '../components/LinkButton.vue';
+
 import {db} from '../firebase.js'
 const uid = inject('uid')
-
-const user = (await getDoc(doc(db, 'users', uid))).data()
-
 
 function randomInt(max) {
     return Math.floor(Math.random() * max);
@@ -163,6 +168,7 @@ let stimulus_seq = [
 
 stimulus_seq.sort(() => Math.random() - 0.5)
 
+stimulus_seq = stimulus_seq.slice(6)
 
 const success = computed(() => {
     let correctly = true
@@ -210,14 +216,9 @@ const left_block = reactive({
     colorize: true
 })
 
+const results_pool = reactive([])
 
-const results_pool = reactive(user.stroop ? user.stroop : [])
-
-if(results_pool.length){
-    game_status.value = 'score'
-}
-
-let tests_count = 24
+let tests_count = 6
 let tests_passed = 0
 
 let max_reaction_time = computed(() => {
@@ -253,11 +254,13 @@ let generate_random_stimulus = () => {
     let congruents = randomInt(2)
     let direction =  randomInt(2)
     
+    let correctly = true
     let stimulus = {
         first_color, 
         second_color,
         congruents, 
-        direction
+        direction,
+        correctly
     }
 
     return stimulus
@@ -355,7 +358,7 @@ let turn = () => {
     }
     else{
 
-        updateDoc(doc(db, 'users', uid), {stroop:results_pool})
+        // updateDoc(doc(db, 'users', uid), {stroop:results_pool})
 
         game_status.value = 'score'
     }

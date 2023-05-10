@@ -21,7 +21,7 @@
 
             <fieldset class="block border border-neutral-400 border-dashed p-2">
                 <legend class="text-lg">Возраст</legend>
-                <input class="form-input mt-1 block" type="number" v-model="anketa.age" name="age" min="1" max="200" placeholder="Число полных лет" >
+                <input class="form-input mt-1 block w-36" type="number" v-model="anketa.age" name="age" min="1" max="200" placeholder="Полных лет" >
             </fieldset>
         
             <fieldset class="block border border-neutral-400 border-dashed p-2">
@@ -87,17 +87,21 @@
 
 
             <fieldset class="block border border-neutral-400 border-dashed p-2">
-                <legend class="text-lg">Есть ли у вас офтальмологические диагнозы?</legend>
+                <legend class="text-lg">Есть ли у вас офтальмологические заболевания?</legend>
+
                 <div>
-                    <input class="border-0 border-b"  type="text" v-model="anketa.visual_diseases" name="visual_diseases" placeholder="Близорукость, астигматизм и.т.п." >
+                    <input class="form-radio" type="radio" v-model="anketa.visual_diseases" value="yes" name="visual_diseases">
+                    <span class="ml-2">Да:</span> <input class="border-0 border-b" type="text" v-model="anketa.visual_diseases_description" name="visual_diseases" placeholder="Близорукость, астигматизм и.т.п." >
                 </div>
 
-            </fieldset>
+                <div>
+                    <input class="form-radio" type="radio" v-model="anketa.visual_diseases" value="not" name="visual_diseases">
+                    <span class="ml-2">Нет</span>
+                </div>
 
-            <fieldset class="block border border-neutral-400 border-dashed p-2">
-                <legend class="text-lg">Email для обратной связи</legend>
-                <p>Мы вышлем вам на него результаты тестирования.</p>
-                <input class="border-0 border-b" type="email" placeholder="Заполняйте по желанию" v-model="anketa.email">
+                <div>
+                </div>
+
             </fieldset>
 
         </div>
@@ -135,8 +139,8 @@ let anketa = reactive(user.anketa ? user.anketa : {
     artist: '',
     artist_other: '',
     visual_diseases: '',
+    visual_diseases_description: '',
     synesthesia: '',
-    email: '',
 })
 
 const filled = computed(() => {

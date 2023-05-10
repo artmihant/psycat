@@ -11,7 +11,7 @@
             <p>Меня зовут Екатерина Чаунина. Я студентка 4 курса направления «Клиническая психология» Первого МГМУ им. И.М. Сеченова, 
                 провожу исследование, посвященное полушарным различиям восприятия цвета.  </p>
 
-            <p>Мы вас попросим выполнить несколько методик. Это займет у вас не более 30 минут.  </p>
+            <p>Мы вас попросим выполнить несколько методик. Это займет у вас не более 15 минут.  </p>
             <p>   
                 Все сведения, полученные от вас, конфиденциальны и будут использованы исключительно 
                 в научных целях в анонимном виде, что не позволит идентифицировать 
@@ -32,26 +32,38 @@
 
         <div class="w-full text-neutral-400">
             <ul>
-                <li><RouterLink to="anketa">Анкета </RouterLink></li>
+                <!-- <li><RouterLink to="anketa">Анкета </RouterLink></li>
                 <li><RouterLink to="annet">Тест Аннет</RouterLink></li>
                 <li><RouterLink to="ishihara">Тест Ишихары</RouterLink></li>
                 <li><RouterLink to="stroop">Тест Струпа</RouterLink></li>
-                <li><RouterLink to="gilbert">Тест Гилберта</RouterLink></li>
+                <li><RouterLink to="gilbert">Тест Гилберта</RouterLink></li> -->
                 <!-- <li><RouterLink to="delaystroop">Отложенный тест Струпа</RouterLink></li>            -->
                 <!-- <li><RouterLink to="testfirebase">Тест FireBase</RouterLink></li>         -->
             </ul>
         </div>
+
+        <button @click="clear" class="absolute bottom-5 right-5 cursor-pointer text-neutral-500 text-xl">Ψ</button>
+
     </div>
 </div>
 </div>
 </template>
 
 <script setup>
-
+import {generateRandomQuality, generateRandomAnimale, generateRandomColor} from '../lib/random_string'
 
 import LinkButton from '../components/LinkButton.vue';
 
 const mobile = window.browserInfo.mobile
 
+
+const clear = () => {
+
+    let cid = window.localStorage.getItem('cid')
+    let uid = cid + '_' + generateRandomColor() + '_' + generateRandomAnimale()
+    window.localStorage.setItem('uid',uid)
+    window.location.reload()
+
+}
 
 </script>

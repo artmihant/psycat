@@ -13,8 +13,6 @@ import {doc, getDoc, setDoc} from 'firebase/firestore'
 
 import {db} from './firebase.js'
 
-let userSnap
-
 let cid = window.localStorage.getItem('cid')
 
 if(!cid){
@@ -29,22 +27,21 @@ const create_user = async () => {
 
     let uid = cid + '_' + generateRandomColor() + '_' + generateRandomAnimale()
 
-    userSnap = await setDoc(doc(db, "users", uid), data);
+    await setDoc(doc(db, "users", uid), data);
 
     window.localStorage.setItem('uid', uid)
-    return userSnap
+    return uid
 }
 
 
 let uid = window.localStorage.getItem('uid')
 
 if(!uid){
-    userSnap = await create_user()
-    uid = userSnap.id
+    uid = await create_user()
 }else{
-    userSnap = await getDoc(doc(db, 'users', uid))
+    let userSnap = await getDoc(doc(db, 'users', uid))
     if (!userSnap.exists()){
-        userSnap = await create_user()
+        uid = await create_user()
     }
 }
 

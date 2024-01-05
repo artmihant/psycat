@@ -57,11 +57,13 @@
     <div v-show="game_status=='init'" class="h-screen justify-center flex flex-col flex-1 "> 
         <div class="h-screen justify-center items-center flex flex-col flex-1  m-auto ">
             <div class="w-[550px]">
+                <p>Вы прошли тренировочный тест! А сейчас начнется настоящее испытание.</p>
+                <p>Напомним правила.</p>
                 <p>Сейчас на экране появится 12 квадратов.</p>
                 <p>Цвет одного отличается от цвета остальных.</p>
                 <p>Нужно как можно быстрее определить, в какой части экрана (правой или левой).
                     от центра расположен этот квадрат, <br/> нажав клавишу <b>Q</b> (слева) или <b>P</b> (справа)</p>
-
+                <p> При выполнении задания необходимо смотреть на крестик по центру экрана</p>
                 <div class="text-center">
                     <button @click="start_game"
                         class="rounded-lg border p-2 border-neutral-700 bg-white text-neutral-900"
@@ -180,7 +182,11 @@ let tests_count = 21
 let tests_passed = 0
 let rounds_count = 6
 
-const directions = Array((tests_count-1)/2).fill(0).concat(Array((tests_count-1)/2).fill(1)) 
+// const directions = Array((tests_count-1)/2).fill(0).concat(Array((tests_count-1)/2).fill(1)) 
+
+// const directions = [1,1,1,1,1, 1,1,1,1,1, 1,1,1,1,1, 1,1,1,1,1]
+
+const directions = [0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0]
 
 const results_pool = reactive(user.gilbert ? user.gilbert : [])
 

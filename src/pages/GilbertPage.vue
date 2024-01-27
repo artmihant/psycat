@@ -46,6 +46,7 @@
                     'top': (-size/2 + -radius*Math.cos(Math.PI/6*(i+0.5))) + 'mm',
                     'left':(-size/2 + radius*Math.sin(Math.PI/6*(i+0.5))) + 'mm',
                     'background-color':sq.color,
+                    'border-radius': size/2 + 'mm',
                 }"
             ></div>
             </div>
@@ -124,7 +125,7 @@
 import {inject, ref, reactive, computed} from 'vue'
 
 const radius = ref(70) //mm
-const size = ref(10) //mm
+const size = ref(11.28) //mm
 
 import { useDocument, useCollection} from 'vuefire'
 import {collection, doc, getDoc, addDoc, updateDoc} from 'firebase/firestore'
@@ -143,8 +144,6 @@ const pallete = {
     N:'#b2b2b2',
     B:'#000000',
 }
-
-
 
 
 const colors = [

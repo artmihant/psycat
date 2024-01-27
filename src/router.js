@@ -7,15 +7,10 @@ const routes = [
         component: () => import('./pages/HomePage.vue'),
     },
     {
-        path: '/anketa',
-        name: 'anketa',
-        component: () => import('./pages/AnketaPage.vue'),
-    },
-    {
-        path: '/annet',
-        name: 'annet',
-        component: () => import('./pages/AnnetPage.vue'),
-    },
+        path: '/pallete',
+        name: 'pallete',
+        component: () => import('./pages/PalletePage.vue'),
+    },    
     {
         path: '/ishihara',
         name: 'ishihara',
@@ -32,14 +27,14 @@ const routes = [
         component: () => import('./pages/StroopTrainingPage.vue'),
     },
     {
-        path: '/delaystroop',
-        name: 'delaystroop',
-        component: () => import('./pages/DelayStroopPage.vue'),
-    },
-    {
         path: '/gilberttraining',
         name: 'gilberttraining',
         component: () => import('./pages/GilbertTrainingPage.vue'),
+    },
+    {
+        path: '/cameratest',
+        name: 'cameratest',
+        component: () => import('./pages/CameraTest2Page.vue'),
     },
     {
         path: '/gilbert',
@@ -56,7 +51,6 @@ const routes = [
         name: 'statistics',
         component: () => import('./pages/StatisticsPage.vue'),
     },
-
 ]
 
 const router = createRouter({

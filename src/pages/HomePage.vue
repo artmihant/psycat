@@ -27,18 +27,17 @@
         </div>
 
         <div class="mt-3 text-center font-bold">
-            <LinkButton :disabled="mobile" to="anketa"> Принять участие</LinkButton>
+            <LinkButton :disabled="mobile" to="gilberttraining">Принять участие</LinkButton>
         </div>
 
         <div class="w-full text-neutral-400">
             <ul>
-                <!-- <li><RouterLink to="anketa">Анкета </RouterLink></li>
-                <li><RouterLink to="annet">Тест Аннет</RouterLink></li>
                 <li><RouterLink to="ishihara">Тест Ишихары</RouterLink></li>
                 <li><RouterLink to="stroop">Тест Струпа</RouterLink></li>
-                <li><RouterLink to="gilbert">Тест Гилберта</RouterLink></li> -->
-                <!-- <li><RouterLink to="delaystroop">Отложенный тест Струпа</RouterLink></li>            -->
-                <!-- <li><RouterLink to="testfirebase">Тест FireBase</RouterLink></li>         -->
+                <li><RouterLink to="gilbert">Тест Гилберта</RouterLink></li>
+                <li><RouterLink to="cameratest">Тест камеры</RouterLink></li>           
+                <li><RouterLink to="pallete">Палитра</RouterLink></li>           
+
             </ul>
         </div>
 

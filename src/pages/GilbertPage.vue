@@ -39,20 +39,37 @@
                 </table>
                 
                 </div>
-                <div v-for="sq, i in sqartes" class="absolute"
+                <div v-for="sq, i in sqartes" class="absolute heart"
                 :style="{
                     'width': size + 'mm',
                     'height': size + 'mm',
                     'top': (-size/2 + -radius*Math.cos(Math.PI/6*(i+0.5))) + 'mm',
                     'left':(-size/2 + radius*Math.sin(Math.PI/6*(i+0.5))) + 'mm',
-                    'background-color':sq.color,
-                    'border-radius': size/2 + 'mm',
-                }"
-            ></div>
+                }">
+                    <div class="before"
+                        :style="{
+                            'background-color':sq.color,
+                            'width': size + 'mm',
+                            'height': 1.5*size + 'mm',
+                            'left': size/2 + 'mm',
+                            'border-radius': size + 'mm ' + size + 'mm 0 0'
+                        }"                              
+                    ></div>
+                    <div class="after"
+                        :style="{
+                            'background-color':sq.color,
+                            'width': size + 'mm',
+                            'height': 1.5*size + 'mm',
+                            'left':  -size/2 + 'mm',
+                            'border-radius': size + 'mm ' + size + 'mm 0 0'
+                        }"      
+                    ></div>
+                </div>
             </div>
         </div>
 
     </div>
+
 
 
     <div v-show="game_status=='init'" class="h-screen justify-center flex flex-col flex-1 "> 
@@ -125,7 +142,7 @@
 import {inject, ref, reactive, computed} from 'vue'
 
 const radius = ref(70) //mm
-const size = ref(11.28) //mm
+const size = ref(7.28) //mm
 
 import { useDocument, useCollection} from 'vuefire'
 import {collection, doc, getDoc, addDoc, updateDoc} from 'firebase/firestore'
@@ -147,8 +164,8 @@ const pallete = {
 
 
 const colors = [
-    '#ff1100','#ff4400','#ff5f00',
-    '#6bff00','#a1ff00','#d7ff00',
+    '#ff3b28','#ff2b6e','#ff00a0',
+    '#FF0065','#FF0000','#FD5b00',
     '#0051ff','#0081ff','#00bcff'
 ]
 
@@ -177,7 +194,7 @@ const color_pairs = [
 
 const crosson = ref(false)
 
-let tests_count = 21
+let tests_count = 5
 let tests_passed = 0
 let rounds_count = 6
 
@@ -214,7 +231,7 @@ let generate_random_stimulus = (tests_passed) => {
         direction = directions[tests_passed%tests_count-1]
     }
     
-    randomInt(2)
+    direction = randomInt(2)
 
     let position = randomInt(6)
 
@@ -249,7 +266,7 @@ let keyup = () => {
 
 
 let start_game = () =>{
-    document.documentElement.requestFullscreen();
+    // document.documentElement.requestFullscreen();
     document.removeEventListener("keyup", start_game);
 
     tests_passed = 0
@@ -335,3 +352,27 @@ let turn = () => {
 
 
 </script>
+
+<style>
+
+.before, .after {
+  position: absolute;
+  top: 0;
+  width: 52px;
+  height: 80px;
+  border-radius: 50px 50px 0 0;
+}
+
+.before {
+  left: 50px;
+  transform: rotate(-45deg);
+  transform-origin: 0 100%;
+}
+
+.after {
+  left: 0;
+  transform: rotate(45deg);
+  transform-origin: 100% 100%;
+}
+
+</style>

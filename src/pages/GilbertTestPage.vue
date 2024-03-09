@@ -8,10 +8,10 @@
                 <component 
                     v-for="view, i in viewstate"
                     :key="i"
-                    :is="view.figure" 
-                    :color="pallete.color" 
-                    :top="-radius*Math.cos(2*Math.PI/sq_count*(i+0.5))"
-                    :left="radius*Math.sin(2*Math.PI/sq_count*(i+0.5))"
+                    :is="figures[view.figure]" 
+                    :color="view.color" 
+                    :top="-radius*Math.cos(2*Math.PI/viewcount*(i+0.5))"
+                    :left="radius*Math.sin(2*Math.PI/viewcount*(i+0.5))"
                     :scale="scale"
                 />
 
@@ -75,59 +75,52 @@ const pallete = {
 
 }
 
-const sq_count = 12
+const viewcount = ref(12)
 
 const viewstate = reactive([
     {
-        figure: AppleFigure,
+        figure: 'apple',
         color: pallete.apple
     },
     {
-        figure: BananaFigure,
+        figure: 'banana',
         color: pallete.banana
     },
     {
-        figure: BlobFigure,
+        figure: 'blob',
         color: pallete.blob
     },
     {
-        figure: CirculeFigure,
+        figure: 'circule',
         color: pallete.circule
     },
     {
-        figure: HeartFigure,
+        figure: 'heart',
         color: pallete.heart
     },
     {
-        figure: HexFigure,
+        figure: 'hex',
         color: pallete.hex
     },
     {
-        figure: LeafFigure,
+        figure: 'leaf',
         color: pallete.leaf
     },
     {
-        figure: LemonFigure,
+        figure: 'lemon',
         color: pallete.lemon
     },
     {
-        figure: SquareFigure,
+        figure: 'square',
         color: pallete.square
     },
     {
-        figure: SunFigure,
+        figure: 'sun',
         color: pallete.sun
-    },
-    {
-        figure: CirculeFigure,
-        color: pallete.circule
-    },
-    {
-        figure: HeartFigure,
-        color: pallete.heart
     },
 ])
 
+viewcount.value = viewstate.length
 
 // for(let i=0;i<sq_count;i++){
 //     sqartes.push({

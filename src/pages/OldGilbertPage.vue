@@ -2,10 +2,44 @@
     <div v-show="game_status=='play'" class="h-screen flex w-full justify-center" :style="{'background-color':pallete.N}">
         <div  class="h-screen justify-center items-center flex flex-col flex-1  m-auto">
             <div class="relative">
+                <div v-show="crosson" class="text-center absolute" style="color:#222; line-height:1;"
+                    :style="{top:'-'+(size/2)+'mm',left:'-'+(size/2)+'mm'}">
+                <table>
+                    <tr>
+                        <td :style="{
+                            'border-bottom':'1px solid '+pallete.B, 
+                            'border-right': '1px solid '+pallete.B, 
+                        }"><div :style="{
+                            'width':(size/2)+'mm', 
+                            'height':(size/2)+'mm'
+                        }"></div></td>
+                        <td :style="{
+                            'border-bottom':'1px solid '+pallete.B, 
+                            'border-left': '1px solid '+pallete.B, 
+                        }"><div :style="{
+                            'width':(size/2)+'mm', 
+                            'height':(size/2)+'mm'
+                        }"></div></td>
+                    </tr>
+                    <tr>
+                        <td :style="{
+                            'border-top':'1px solid '+pallete.B, 
+                            'border-right': '1px solid '+pallete.B, 
+                        }"><div :style="{
+                            'width':(size/2)+'mm', 
+                            'height':(size/2)+'mm'
+                        }"></div></td>
+                        <td :style="{
+                            'border-top':'1px solid '+pallete.B, 
+                            'border-left': '1px solid '+pallete.B, 
+                        }"><div :style="{
+                            'width':(size/2)+'mm', 
+                            'height':(size/2)+'mm'
+                        }"></div></td>
+                    </tr>
+                </table>
                 
-                <GilbertCross :size="size" :color=pallete.B />
-
-
+                </div>
                 <div v-for="sq, i in sqartes" class="absolute heart"
                 :style="{
                     'width': size + 'mm',
@@ -32,8 +66,6 @@
                         }"      
                     ></div>
                 </div>
-
-                
             </div>
         </div>
 

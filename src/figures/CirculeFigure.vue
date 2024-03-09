@@ -3,9 +3,10 @@
     <svg xml:space="preserve" class="absolute" :style="{
             'top': (top-size/2) + 'mm',
             'left': (left-size/2) + 'mm',
-            'fill':color
+            'fill':color,
+            'transform': `scale(${scale}, ${scale})`
         }" :width="size + 'mm'" :height="size+ 'mm'"  xmlns="http://www.w3.org/2000/svg">
-        <circle cx="21.338" cy="21.338" r="21.338"/>
+       <circle cx="21.338" cy="21.338" r="21.338"/>
     </svg>
 
 </template>
@@ -29,6 +30,10 @@ defineProps({
         type: Number,
         required: true
     },
+    scale: {
+        type: Number,
+        required: true
+    }
 })
 
 </script>

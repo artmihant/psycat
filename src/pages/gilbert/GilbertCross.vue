@@ -6,6 +6,8 @@
         <table>
             <tr>
                 <td :style="{
+                    'margin':0,
+                    'padding':0,
                     'border-bottom': border_string, 
                     'border-right': border_string, 
                 }"><div :style="{
@@ -13,6 +15,8 @@
                     'height':size_string
                 }"></div></td>
                 <td :style="{
+                    'margin':0,
+                    'padding':0,
                     'border-bottom': border_string, 
                     'border-left': border_string, 
                 }"><div :style="{
@@ -22,6 +26,8 @@
             </tr>
             <tr>
                 <td :style="{
+                    'margin':0,
+                    'padding':0,
                     'border-top': border_string, 
                     'border-right': border_string, 
                 }"><div :style="{
@@ -29,6 +35,8 @@
                     'height':size_string
                 }"></div></td>
                 <td :style="{
+                    'margin':0,
+                    'padding':0,
                     'border-top': border_string, 
                     'border-left': border_string, 
                 }"><div :style="{

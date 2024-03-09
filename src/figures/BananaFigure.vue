@@ -3,7 +3,8 @@
     <svg xml:space="preserve" class="absolute" :style="{
         'top': (top-size/2) + 'mm',
         'left': (left-size/2) + 'mm',
-        'fill':color
+        'fill':color,
+        'transform': `scale(${scale}, ${scale})`
     }" :width="size + 'mm'" :height="size+ 'mm'"  xmlns="http://www.w3.org/2000/svg">
 
         <path d="M67.914 32.304c-3.128 4.635-13.398 17.508-31.001 17.508-13.769 0-27.99-8.024-34.255-12.046.441-1.27.426-2.632.295-3.699.057 0 .116.003.174.008 5.565.494 14.743 4.985 14.743 4.985 10.187 5.367 19.205 5.208 20.59 5.148.152-.007.304-.01.456-.013 12.452-.221 23.052-10.925 25.75-13.885l2.242 1.72a1.374 1.374 0 0 0 1.006.274" />
@@ -36,6 +37,10 @@ defineProps({
         type: Number,
         required: true
     },
+    scale: {
+        type: Number,
+        required: true
+    }
 })
 
 </script>

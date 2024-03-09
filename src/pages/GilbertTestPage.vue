@@ -5,99 +5,18 @@
         <div class="h-screen justify-center items-center flex flex-col flex-1 m-auto">
             <div class="relative">
 
-                <GilbertCross :size="size" :color=pallete.cross />
-
-                <AppleFigure 
-                    :color="pallete.apple" 
-                    :top="70"
-                    :left="0"
+                <component 
+                    v-for="view, i in viewstate"
+                    :key="i"
+                    :is="view.figure" 
+                    :color="pallete.color" 
+                    :top="-radius*Math.cos(2*Math.PI/sq_count*(i+0.5))"
+                    :left="radius*Math.sin(2*Math.PI/sq_count*(i+0.5))"
+                    :scale="scale"
                 />
 
-                <BananaFigure 
-                    :color="pallete.banana" 
-                    :top="-70"
-                    :left="0"
-                />
+                <GilbertCross :size="crosssize*scale" :color=pallete.cross />
 
-                <BlobFigure 
-                    :color="pallete.blob" 
-                    :top="0"
-                    :left="70"
-                />
-
-
-                <CirculeFigure 
-                    :color="pallete.circule" 
-                    :top="0"
-                    :left="-70"
-                />
-
-                <HeartFigure 
-                    :color="pallete.heart" 
-                    :top="-50"
-                    :left="50"
-                />
-
-                <HexFigure 
-                    :color="pallete.hex" 
-                    :top="50"
-                    :left="50"
-                />
-
-                <LeafFigure 
-                    :color="pallete.leaf" 
-                    :top="50"
-                    :left="-50"
-                />
-
-                <LemonFigure 
-                    :color="pallete.lemon" 
-                    :top="-50"
-                    :left="-50"
-                />
-
-                <SquareFigure 
-                    :color="pallete.square" 
-                    :top="30"
-                    :left="30"
-                />
-
-                <SunFigure 
-                    :color="pallete.sun" 
-                    :top="-30"
-                    :left="30"
-                />
-
-
-<!-- 
-                <div v-for="sq, i in sqartes" class="absolute heart"
-                :style="{
-                    'width': size + 'mm',
-                    'height': size + 'mm',
-                    'top': (-size/2 + -radius*Math.cos(Math.PI/6*(i+0.5))) + 'mm',
-                    'left':(-size/2 + radius*Math.sin(Math.PI/6*(i+0.5))) + 'mm',
-                }">
-
-
-                    <div class="before"
-                        :style="{
-                            'background-color':sq.color,
-                            'width': size + 'mm',
-                            'height': 1.5*size + 'mm',
-                            'left': size/2 + 'mm',
-                            'border-radius': size + 'mm ' + size + 'mm 0 0'
-                        }"                              
-                    ></div>
-                    <div class="after"
-                        :style="{
-                            'background-color':sq.color,
-                            'width': size + 'mm',
-                            'height': 1.5*size + 'mm',
-                            'left':  -size/2 + 'mm',
-                            'border-radius': size + 'mm ' + size + 'mm 0 0'
-                        }"      
-                    ></div>
-                </div> -->
             </div>
         </div>
 
@@ -111,7 +30,6 @@
 import {inject, ref, reactive, computed} from 'vue'
 import GilbertCross from './gilbert/GilbertCross.vue';
 
-
 import AppleFigure from '../figures/AppleFigure.vue';
 import BananaFigure from '../figures/BananaFigure.vue';
 import BlobFigure from '../figures/BlobFigure.vue';
@@ -123,10 +41,23 @@ import LemonFigure from '../figures/LemonFigure.vue';
 import SquareFigure from '../figures/SquareFigure.vue';
 import SunFigure from '../figures/SunFigure.vue';
 
-
+const figures = {
+    apple: AppleFigure,
+    banana: BananaFigure, 
+    blob: BlobFigure,
+    circule: CirculeFigure,
+    heart: HeartFigure,
+    hex: HexFigure,
+    leaf: LeafFigure,
+    lemon: LemonFigure,
+    square: SquareFigure,
+    sun: SunFigure
+}
 
 const radius = ref(70) //mm
-const size = ref(7.28) //mm
+const crosssize = ref(10) //mm
+
+const scale = ref(1)
 
 const pallete = {
     neutral: '#b2b2b2',
@@ -144,17 +75,68 @@ const pallete = {
 
 }
 
-
 const sq_count = 12
 
+const viewstate = reactive([
+    {
+        figure: AppleFigure,
+        color: pallete.apple
+    },
+    {
+        figure: BananaFigure,
+        color: pallete.banana
+    },
+    {
+        figure: BlobFigure,
+        color: pallete.blob
+    },
+    {
+        figure: CirculeFigure,
+        color: pallete.circule
+    },
+    {
+        figure: HeartFigure,
+        color: pallete.heart
+    },
+    {
+        figure: HexFigure,
+        color: pallete.hex
+    },
+    {
+        figure: LeafFigure,
+        color: pallete.leaf
+    },
+    {
+        figure: LemonFigure,
+        color: pallete.lemon
+    },
+    {
+        figure: SquareFigure,
+        color: pallete.square
+    },
+    {
+        figure: SunFigure,
+        color: pallete.sun
+    },
+    {
+        figure: CirculeFigure,
+        color: pallete.circule
+    },
+    {
+        figure: HeartFigure,
+        color: pallete.heart
+    },
+])
 
-const sqartes = reactive([])
 
-for(let i=0;i<sq_count;i++){
-    sqartes.push({
-        color:  pallete.cross
-    })
-} 
+// for(let i=0;i<sq_count;i++){
+//     sqartes.push({
+//         color:  pallete.cross
+//     })
+// } 
+
+
+
 
 </script>
 

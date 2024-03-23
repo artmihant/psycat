@@ -79,8 +79,8 @@ const viewcount = ref(12)
 
 const viewstate = reactive([
     {
-        figure: 'apple',
-        color: pallete.apple
+        figure: 'heart',
+        color: pallete.heart
     },
     {
         figure: 'banana',
@@ -95,12 +95,8 @@ const viewstate = reactive([
         color: pallete.circule
     },
     {
-        figure: 'heart',
-        color: pallete.heart
-    },
-    {
-        figure: 'hex',
-        color: pallete.hex
+        figure: 'apple',
+        color: pallete.apple
     },
     {
         figure: 'leaf',

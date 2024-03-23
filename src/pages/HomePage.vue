@@ -8,7 +8,7 @@
         <div class="max-w-[550px]"> 
             <p><b>Уважаемые респонденты!</b></p>
 
-            <p>Меня зовут Екатерина Чаунина. Я студентка 4 курса направления «Клиническая психология» Первого МГМУ им. И.М. Сеченова, 
+            <p>Меня зовут Екатерина Чаунина. Я студентка 5 курса направления «Клиническая психология» Первого МГМУ им. И.М. Сеченова, 
                 провожу исследование, посвященное полушарным различиям восприятия цвета.  </p>
 
             <p>Мы вас попросим выполнить несколько методик. Это займет у вас не более 15 минут.  </p>
@@ -32,11 +32,12 @@
 
         <div class="w-full text-neutral-400">
             <ul>
+                <li><RouterLink to="gilbert">Тест Гилберта</RouterLink></li>
+                <li><RouterLink to="calibration">Калибровка</RouterLink></li>           
+                <li><RouterLink to="pallete">Палитра</RouterLink></li>           
+                <li><RouterLink to="picto">Пиктограммы</RouterLink></li>           
                 <li><RouterLink to="ishihara">Тест Ишихары</RouterLink></li>
                 <li><RouterLink to="stroop">Тест Струпа</RouterLink></li>
-                <li><RouterLink to="gilbert">Тест Гилберта</RouterLink></li>
-                <li><RouterLink to="cameratest">Тест камеры</RouterLink></li>           
-                <li><RouterLink to="pallete">Палитра</RouterLink></li>           
 
             </ul>
         </div>

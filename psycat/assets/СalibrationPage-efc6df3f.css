@@ -1,0 +1,1 @@
+.before,.after{position:absolute;top:0;width:52px;height:80px;border-radius:50px 50px 0 0}.before{left:50px;transform:rotate(-45deg);transform-origin:0 100%}.after{left:0;transform:rotate(45deg);transform-origin:100% 100%}

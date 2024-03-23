@@ -32,6 +32,11 @@ const routes = [
         component: () => import('./pages/GilbertTrainingPage.vue'),
     },
     {
+        path: '/calibration',
+        name: 'calibration',
+        component: () => import('./pages/СalibrationPage.vue'),
+    },
+    {
         path: '/cameratest',
         name: 'cameratest',
         component: () => import('./pages/CameraTest2Page.vue'),
@@ -42,8 +47,8 @@ const routes = [
         component: () => import('./pages/GilbertPage.vue'),
     },
     {
-        path: '/gilberttest',
-        name: 'gilberttest',
+        path: '/picto',
+        name: 'picto',
         component: () => import('./pages/GilbertTestPage.vue'),
     },
  

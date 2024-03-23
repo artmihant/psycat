@@ -5,10 +5,10 @@
             <div class="w-[550px]">
                 <!-- <p>Вы прошли тренировочный тест! А сейчас начнется настоящее испытание.</p>
                 <p>Напомним правила.</p> -->
-                <p>Сейчас на экране появится 12 фигур.</p>
-                <p>Цвет одной отличается от цвета остальных.</p>
+                <p>Сейчас на экране появится 12 квадратов.</p>
+                <p>Цвет одного отличается от цвета остальных.</p>
                 <p>Нужно как можно быстрее определить, в какой части экрана (правой или левой).
-                    от центра расположен эта фигура, <br/> нажав клавишу <b>Q</b> (слева) или <b>P</b> (справа)</p>
+                    от центра расположен этот квадрат, <br/> нажав клавишу <b>Q</b> (слева) или <b>P</b> (справа)</p>
                 <p> При выполнении задания необходимо смотреть на крестик по центру экрана</p>
                 <div class="text-center">
                     <button @click="startGame"
@@ -176,60 +176,51 @@ const pallete = {
 }
 
 
+// color(display-p3 0.1532 0.725 0.6698)
+
 const cr0 = new Color('color(display-p3 0.9244 0.2464 0.4044)')
 
 const cr1 = new Color('color(display-p3 0.9336 0.268 0.2039)')
-
-const cr2 = new Color('color(display-p3 0.8913 0.2542 0.571)')
+const cr2 = new Color('color(display-p3 0.9329 0.2736 0.166)')
+const cr3 = new Color('color(display-p3 0.9316 0.2799 0.1176)')
+const cr4 = new Color('color(display-p3 0.9298 0.2869 0.0417)')
 
 
 const cy0 = new Color('color(display-p3 0.9362 0.7218 0.0842)')
 
-const cy1 = new Color('color(display-p3 0.8169 0.7855 0.1726)') //7
+const cy1 = new Color('color(display-p3 0.8169 0.7855 0.1726)')
+const cy2 = new Color('color(display-p3 0.7975 0.7939 0.1963)')
+const cy3 = new Color('color(display-p3 0.7769 0.8024 0.2213)')
+const cy4 = new Color('color(display-p3 0.7553 0.8107 0.2471)')
 
-const cy2 = new Color('color(display-p3 0.9805 0.6286 0.1624)') 
 
 
 const cb0 = new Color('color(display-p3 0.0772 0.7146 0.7601)')
 
 const cb1 = new Color('color(display-p3 0.2086 0.6784 0.8873)')
+const cb2 = new Color('color(display-p3 0.235 0.6717 0.9013)')
+const cb3 = new Color('color(display-p3 0.2622 0.6645 0.9147)')
+const cb4 = new Color('color(display-p3 0.2891 0.657 0.9268)')
 
-const cb2 = new Color('color(display-p3 0.2336 0.727 0.5989)')
 
 
 
 const experiment_program = [
 
     {
-        ground: '#929292',
-        target: '#000000',
+        ground: cr0.toString(),
+        target: cr4.toString(),
         figure: 'square',
         principle: fullshaffle,
-        length: 3
+        length: 13
     }, 
 
     {
         ground: cr0.toString(),
-        target: cr1.toString(),
-        figure: 'heart',
-        principle: fullshaffle,
-        length: 3
-    }, 
-
-    {
-        ground: cr0.toString(),
-        target: cr2.toString(),
-        figure: 'heart',
-        principle: fullshaffle,
-        length: 3
-    }, 
-
-    {
-        ground: cr0.toString(),
-        target: cr1.toString(),
+        target: cr3.toString(),
         figure: 'square',
         principle: fullshaffle,
-        length: 3
+        length: 13
     }, 
 
     {
@@ -237,73 +228,75 @@ const experiment_program = [
         target: cr2.toString(),
         figure: 'square',
         principle: fullshaffle,
-        length: 3
+        length: 13
     }, 
 
     {
-        ground: cy0.toString(),
-        target: cy1.toString(),
-        figure: 'sun',
-        principle: fullshaffle,
-        length: 3
-    }, 
-
-    {
-        ground: cy0.toString(),
-        target: cy2.toString(),
-        figure: 'sun',
-        principle: fullshaffle,
-        length: 3
-    }, 
-
-    {
-        ground: cy0.toString(),
-        target: cy1.toString(),
+        ground: cr0.toString(),
+        target: cr1.toString(),
         figure: 'square',
         principle: fullshaffle,
-        length: 3
+        length: 13
     }, 
 
+    {
+        ground: cy0.toString(),
+        target: cy4.toString(),
+        figure: 'square',
+        principle: fullshaffle,
+        length: 13
+    }, 
+    {
+        ground: cy0.toString(),
+        target: cy3.toString(),
+        figure: 'square',
+        principle: fullshaffle,
+        length: 13
+    }, 
     {
         ground: cy0.toString(),
         target: cy2.toString(),
         figure: 'square',
         principle: fullshaffle,
-        length: 3
+        length: 13
     }, 
-
     {
-        ground: cb0.toString(),
-        target: cb1.toString(),
-        figure: 'blob',
-        principle: fullshaffle,
-        length: 3
-    }, 
-
-    {
-        ground: cb0.toString(),
-        target: cb2.toString(),
-        figure: 'blob',
-        principle: fullshaffle,
-        length: 3
-    }, 
-
-    {
-        ground: cb0.toString(),
-        target: cb1.toString(),
+        ground: cy0.toString(),
+        target: cy1.toString(),
         figure: 'square',
         principle: fullshaffle,
-        length: 3
+        length: 13
     }, 
 
+
+    {
+        ground: cb0.toString(),
+        target: cb4.toString(),
+        figure: 'square',
+        principle: fullshaffle,
+        length: 13
+    }, 
+    {
+        ground: cb0.toString(),
+        target: cb3.toString(),
+        figure: 'square',
+        principle: fullshaffle,
+        length: 13
+    }, 
     {
         ground: cb0.toString(),
         target: cb2.toString(),
         figure: 'square',
         principle: fullshaffle,
-        length: 3
+        length: 13
     }, 
-
+    {
+        ground: cb0.toString(),
+        target: cb1.toString(),
+        figure: 'square',
+        principle: fullshaffle,
+        length: 13
+    }, 
 
     
     // {
@@ -645,7 +638,6 @@ const test_count = ref(0)
 
 function startGame() {
 
-
     // document.documentElement.requestFullscreen();
 
     function requestFullScreen(element) {
@@ -663,7 +655,6 @@ function startGame() {
 
     var elem = document.body; // Make the body go full screen.
     requestFullScreen(elem);
-
 
     game_status.value = 'prepare'
 

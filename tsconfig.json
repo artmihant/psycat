@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "esModuleInterop": true,
+        "outDir": "public/js",
+        "module": "es2022",
+        "target": "es2017",
+        "moduleResolution": "node",
+        "checkJs": true,
+        "baseUrl": "src",
+        "paths": {
+            "@/*": ["*"]
+        },
+        "allowJs": true
+    },
+    "include": ["src"],
+}

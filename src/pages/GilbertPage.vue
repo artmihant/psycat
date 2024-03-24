@@ -115,7 +115,6 @@
                     </router-link>
                 </div>
 
-
         </div>
     </div>
 
@@ -126,13 +125,16 @@
 
 <script setup lang="ts">
 import Color from "colorjs.io";
+
+import fullScreen from "../lib/fullscreen"
+
 import {inject, ref, reactive, computed, ReactiveFlags, UnwrapNestedRefs} from 'vue'
 
-// import { useDocument, useCollection} from 'vuefire'
-// import {collection, doc, getDoc, addDoc, updateDoc} from 'firebase/firestore'
-// import {db} from '../firebase.js'
-// const uid = inject('uid')
-// const user = (await getDoc(doc(db, 'users', uid))).data()
+import { useDocument, useCollection} from 'vuefire'
+import {collection, doc, getDoc, addDoc, updateDoc} from 'firebase/firestore'
+import {db} from '../firebase.js'
+const uid = inject('uid')
+const user = (await getDoc(doc(db, 'users', uid))).data()
 
 import GilbertCross from './gilbert/GilbertCross.vue';
 
@@ -176,18 +178,18 @@ const pallete = {
 }
 
 
-const cr0 = new Color('color(display-p3 0.9244 0.2464 0.4044)')
+const cr0 = new Color('color(display-p3 0.9111 0.2904 0.3331)')
 
-const cr1 = new Color('color(display-p3 0.9336 0.268 0.2039)')
+const cr1 = new Color('color(display-p3 0.8886 0.2848 0.5066)')
 
-const cr2 = new Color('color(display-p3 0.8913 0.2542 0.571)')
+const cr2 = new Color('color(display-p3 0.907 0.3246 0.0816)')
 
 
-const cy0 = new Color('color(display-p3 0.9362 0.7218 0.0842)')
+const cy0 = new Color('color(display-p3 0.8675 0.7351 0.0446)')
 
-const cy1 = new Color('color(display-p3 0.8169 0.7855 0.1726)') //7
+const cy1 = new Color('color(display-p3 0.9686 0.67 0.1156)')
 
-const cy2 = new Color('color(display-p3 0.9805 0.6286 0.1624)') 
+const cy2 = new Color('color(display-p3 0.7347 0.7951 0.2312)') 
 
 
 const cb0 = new Color('color(display-p3 0.0772 0.7146 0.7601)')
@@ -199,363 +201,83 @@ const cb2 = new Color('color(display-p3 0.2336 0.727 0.5989)')
 
 
 const experiment_program = [
-
-    {
-        ground: '#929292',
-        target: '#000000',
-        figure: 'square',
-        principle: fullshaffle,
-        length: 3
-    }, 
-
-    {
-        ground: cr0.toString(),
-        target: cr1.toString(),
-        figure: 'heart',
-        principle: fullshaffle,
-        length: 3
-    }, 
-
-    {
-        ground: cr0.toString(),
-        target: cr2.toString(),
-        figure: 'heart',
-        principle: fullshaffle,
-        length: 3
-    }, 
-
     {
         ground: cr0.toString(),
         target: cr1.toString(),
         figure: 'square',
-        principle: fullshaffle,
-        length: 3
+        length: 13
     }, 
-
     {
         ground: cr0.toString(),
         target: cr2.toString(),
         figure: 'square',
-        principle: fullshaffle,
-        length: 3
+        length: 13
     }, 
-
     {
-        ground: cy0.toString(),
-        target: cy1.toString(),
-        figure: 'sun',
-        principle: fullshaffle,
-        length: 3
+        ground: cr0.toString(),
+        target: cr1.toString(),
+        figure: 'heart',
+        length: 13
     }, 
-
     {
-        ground: cy0.toString(),
-        target: cy2.toString(),
-        figure: 'sun',
-        principle: fullshaffle,
-        length: 3
+        ground: cr0.toString(),
+        target: cr2.toString(),
+        figure: 'heart',
+        length: 13
     }, 
 
     {
         ground: cy0.toString(),
         target: cy1.toString(),
         figure: 'square',
-        principle: fullshaffle,
-        length: 3
+        length: 13
     }, 
-
     {
         ground: cy0.toString(),
         target: cy2.toString(),
         figure: 'square',
-        principle: fullshaffle,
-        length: 3
+        length: 13
     }, 
 
     {
-        ground: cb0.toString(),
-        target: cb1.toString(),
-        figure: 'blob',
-        principle: fullshaffle,
-        length: 3
+        ground: cy0.toString(),
+        target: cy1.toString(),
+        figure: 'sun',
+        length: 13
     }, 
-
     {
-        ground: cb0.toString(),
-        target: cb2.toString(),
-        figure: 'blob',
-        principle: fullshaffle,
-        length: 3
+        ground: cy0.toString(),
+        target: cy2.toString(),
+        figure: 'sun',
+        length: 13
     }, 
 
     {
         ground: cb0.toString(),
         target: cb1.toString(),
         figure: 'square',
-        principle: fullshaffle,
-        length: 3
+        length: 13
     }, 
-
     {
         ground: cb0.toString(),
         target: cb2.toString(),
         figure: 'square',
-        principle: fullshaffle,
-        length: 3
+        length: 13
     }, 
 
-
-    
-    // {
-    //     ground: cb0.toString(),
-    //     target: cb6.toString(),
-    //     figure: 'blob',
-    //     principle: fullshaffle,
-    //     length: 13
-    // }, 
-
-    // {
-    //     ground: cb0.toString(),
-    //     target: cb5.toString(),
-    //     figure: 'blob',
-    //     principle: fullshaffle,
-    //     length: 13
-    // }, 
-
-    // {
-    //     ground: cb0.toString(),
-    //     target: cb4.toString(),
-    //     figure: 'blob',
-    //     principle: fullshaffle,
-    //     length: 13
-    // }, 
-
-    // {
-    //     ground: cb0.toString(),
-    //     target: cb3.toString(),
-    //     figure: 'blob',
-    //     principle: fullshaffle,
-    //     length: 13
-    // }, 
-
-    // {
-    //     ground: cb0.toString(),
-    //     target: cb2.toString(),
-    //     figure: 'blob',
-    //     principle: fullshaffle,
-    //     length: 13
-    // }, 
-
-    // {
-    //     ground: cb0.toString(),
-    //     target: cb1.toString(),
-    //     figure: 'blob',
-    //     principle: fullshaffle,
-    //     length: 13
-    // }, 
-
-    // {
-    //     ground: cr0.toString(),
-    //     target: cr3.toString(),
-    //     figure: 'heart',
-    //     principle: fullshaffle,
-    //     length: 4
-    // }, 
-    // {
-    //     ground: cr0.toString(),
-    //     target: cr6.toString(),
-    //     figure: 'heart',
-    //     principle: fullshaffle,
-    //     length: 4
-    // }, 
-
-    // {
-    //     ground: cb0.toString(),
-    //     target: cb5.toString(),
-    //     figure: 'blob',
-    //     principle: fullshaffle,
-    //     length: 4
-    // }, 
-    // {
-    //     ground: cb0.toString(),
-    //     target: cb4.toString(),
-    //     figure: 'blob',
-    //     principle: fullshaffle,
-    //     length: 4
-    // }, 
-    // {
-    //     ground: cb0.toString(),
-    //     target: cb3.toString(),
-    //     figure: 'blob',
-    //     principle: fullshaffle,
-    //     length: 4
-    // }, 
-    // {
-    //     ground: cb0.toString(),
-    //     target: cb2.toString(),
-    //     figure: 'blob',
-    //     principle: fullshaffle,
-    //     length: 4
-    // }, 
-    // {
-    //     ground: cb0.toString(),
-    //     target: cb1.toString(),
-    //     figure: 'blob',
-    //     principle: fullshaffle,
-    //     length: 4
-    // }, 
-
-
-
-    // {
-    //     ground: '#ff4400',
-    //     target: '#ff5f00',
-    //     figure: 'heart',
-    //     principle: fullshaffle,
-    //     length: 4
-    // },
-    // {
-    //     ground: '#a1ff00',
-    //     target: '#6bff00',
-    //     figure: 'sun',
-    //     principle: fullshaffle,
-    //     length: 4
-    // },
-
-    // {
-    //     ground: '#a1ff00',
-    //     target: '#d7ff00',
-    //     figure: 'sun',
-    //     principle: fullshaffle,
-    //     length: 4
-    // }, 
-    // {
-    //     ground: '#0081ff',
-    //     target: '#0051ff',
-    //     figure: 'heart',
-    //     principle: fullshaffle,
-    //     length: 4
-    // },
-    // {
-    //     ground: '#0081ff',
-    //     target: '#00bcff',
-    //     figure: 'leaf',
-    //     principle: fullshaffle,
-    //     length: 4
-    // },
-
-    // {
-    //     ground: '#f7f350',
-    //     target: '#cefe5b',
-    //     figure: 'lemon',
-    //     principle: fullshaffle,
-    //     length: 2
-    // },
-    // {
-    //     ground: '#f7f350',
-    //     target: '#cefe5b',
-    //     figure: 'square',
-    //     principle: fullshaffle,
-    //     length: 2
-    // },
-    // {
-    //     ground: '#f7f350',
-    //     target: '#cefe5b',
-    //     figure: 'sun',
-    //     principle: fullshaffle,
-    //     length: 2
-    // },    
-    
-
-    // {
-    //     ground: '#dc4918',
-    //     target: '#e83536',
-    //     figure: 'blob',
-    //     principle: fullshaffle,
-    //     length: 13
-    // },
-
-    // {
-    //     ground: '#dc4918',
-    //     target: '#e83536',
-    //     figure: 'apple',
-    //     principle: fullshaffle,
-    //     length: 13
-    // },
-    // {
-    //     ground: '#dc4918',
-    //     target: '#e83536',
-    //     figure: 'banana',
-    //     principle: fullshaffle,
-    //     length: 13
-    // },    
-    // {
-    //     ground: '#dc4918',
-    //     target: '#e83536',
-    //     figure: 'blob',
-    //     principle: fullshaffle,
-    //     length: 13
-    // },
-    // {
-    //     ground: '#dc4918',
-    //     target: '#e83536',
-    //     figure: 'circule',
-    //     principle: fullshaffle,
-    //     length: 13
-    // },
-    // {
-    //     ground: '#dc4918',
-    //     target: '#e83536',
-    //     figure: 'heart',
-    //     principle: fullshaffle,
-    //     length: 13
-    // },
-    // {
-    //     ground: '#dc4918',
-    //     target: '#e83536',
-    //     figure: 'hex',
-    //     principle: fullshaffle,
-    //     length: 13
-    // },
-    // {
-    //     ground: '#dc4918',
-    //     target: '#e83536',
-    //     figure: 'leaf',
-    //     principle: fullshaffle,
-    //     length: 13
-    // },
-    // {
-    //     ground: '#dc4918',
-    //     target: '#e83536',
-    //     figure: 'lemon',
-    //     principle: fullshaffle,
-    //     length: 13
-    // },
-    // {
-    //     ground: '#dc4918',
-    //     target: '#e83536',
-    //     figure: 'square',
-    //     principle: fullshaffle,
-    //     length: 13
-    // },
-    // {
-    //     ground: '#dc4918',
-    //     target: '#e83536',
-    //     figure: 'sun',
-    //     principle: fullshaffle,
-    //     length: 13
-    // },
-
+    {
+        ground: cb0.toString(),
+        target: cb1.toString(),
+        figure: 'blob',
+        length: 13
+    }, 
+    {
+        ground: cb0.toString(),
+        target: cb2.toString(),
+        figure: 'blob',
+        length: 13
+    }, 
 ]
-
-// ground: '#fcd86f',
-// target: '#e6e06a',
-
-// const colors = [
-//     '#ff3b28','#ff2b6e','#ff00a0',
-//     '#FF0065','#FF0000','#FD5b00',
-//     '#0051ff','#0081ff','#00bcff'
-// ]
 
 
 const viewstate: ViewFigure[] = reactive([])
@@ -568,43 +290,9 @@ for(let i=0;i<12;i++){
 } 
 
 
-const shaffles = [
-    [5, 9, 7, 1, 11, 8, 4, 3, 6, 10, 2, 0],
-    [8, 3, 11, 1, 0, 8, 9, 6, 10, 2, 5, 4, 7],
-    [5, 8, 1, 0, 11, 3, 6, 4, 9, 2, 7, 10],
-    [5, 7, 9, 6, 10, 11, 4, 2, 0, 1, 3, 8],
-    [6, 7, 0, 3, 5, 10, 1, 4, 11, 2, 9, 8],
-    [10, 6, 4, 9, 5, 8, 1, 3, 2, 7, 0, 11],
-    [0, 10, 8, 3, 9, 5, 7, 1, 6, 11, 4, 2],
-    [6, 10, 7, 5, 3, 4, 8, 11, 0, 1, 2, 9],
-    [5, 10, 1, 6, 9, 11, 0, 7, 3, 4, 2, 8],
-    [5, 9, 7, 1, 11, 8, 4, 3, 6, 10, 2, 0],
-    [8, 3, 11, 1, 0, 8, 9, 6, 10, 2, 5, 4, 7],
-    [5, 8, 1, 0, 11, 3, 6, 4, 9, 2, 7, 10],
-    [5, 7, 9, 6, 10, 11, 4, 2, 0, 1, 3, 8],    
-    [0, 8, 4, 11, 5, 6, 7, 2, 3, 1, 9, 10],
-    [4, 8, 9, 2, 11, 0, 7, 5, 1, 10, 3, 6],
-    [4, 11, 10, 2, 1, 6, 0, 3, 9, 8, 7, 5],
-    [10, 6, 4, 9, 5, 8, 1, 3, 2, 7, 0, 11],
-    [0, 10, 8, 3, 9, 5, 7, 1, 6, 11, 4, 2],
-    [6, 10, 7, 5, 3, 4, 8, 11, 0, 1, 2, 9],
-    [5, 10, 1, 6, 9, 11, 0, 7, 3, 4, 2, 8],    
-]
-
-function randomInt(max:number) {
-    return Math.floor(Math.random() * max);
-}
-
-shaffles.forEach(shaffle => shaffle.unshift(randomInt(12)))
-
-
 function calcDirection(position:number){
     return position < 6 ? 'r' : 'l'
 }
-
-function fullshaffle(s:number, t:number){
-    return shaffles[s][t]
-} 
 
 type ViewFigure = {
     color: string
@@ -645,25 +333,7 @@ const test_count = ref(0)
 
 function startGame() {
 
-
-    // document.documentElement.requestFullscreen();
-
-    function requestFullScreen(element) {
-        var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
-
-        if (requestMethod) { // Native full screen.
-            requestMethod.call(element);
-        } else if (typeof window.ActiveXObject !== "undefined") { // Older IE.
-            var wscript = new ActiveXObject("WScript.Shell");
-            if (wscript !== null) {
-                wscript.SendKeys("{F11}");
-            }
-        }
-    }
-
-    var elem = document.body; // Make the body go full screen.
-    requestFullScreen(elem);
-
+    fullScreen();
 
     game_status.value = 'prepare'
 
@@ -752,7 +422,7 @@ function startTest() {
 
         game_status.value = 'play'
 
-        const position = series.principle(series_count.value, test_count.value)
+        const position = getRandomCard(series_count.value, test_count.value)
 
         const test: Test = {
             position: position,
@@ -809,6 +479,42 @@ function startTest() {
 }
 
 
+
+function downloadResults(ev) {
+        // любая кнопка в форме имеет тип "submit" по умолчанию, т.е. служит для отправки формы на сервер
+    // отправка формы влечет за собой перезагрузку страницы
+    // нам это не нужно, поэтому отключаем стандартное поведение
+    ev.preventDefault()
+
+    const data = {
+        "1": "foo",
+        "2": "bar",
+        "3": "baz"
+    }
+    
+    // создаем файл
+    const file = new Blob(
+        // сериализуем данные
+        [JSON.stringify(data)], {
+            type: 'application/json'
+        }
+    )
+
+    URL.createObjectURL(file)
+
+    // создаем элемент "a"
+    const link = document.createElement('a')
+    // привязываем атрибут "href" тега "a" к созданному файлу
+    link.setAttribute('href', URL.createObjectURL(file))
+    // атрибут "download" позволяет скачивать файлы, на которые указывает ссылка
+    // значение этого атрибута - название скачиваемого файла
+    link.setAttribute('download', 'data.json')
+    // текстовое содержимое ссылки
+    link.textContent = 'DOWNLOAD DATA'
+    // помещаем элемент в контейнер с классом "main"
+    // document.querySelector('.main').append(link)
+
+}
 
 
 /* 

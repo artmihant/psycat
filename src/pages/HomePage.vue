@@ -21,28 +21,32 @@
             <p>
                 При желании вы можете получить обратную связь по результатам исследования . 
             </p>
-            <p v-if="mobile"> <b>К сожалению, вы не сможете пройти наш психологический тест с мобильного устройства.
-            Пожалуйста, зайдите на эту страницу с компьютера. Спасибо!</b> </p>
 
         </div>
 
         <div class="mt-3 text-center font-bold">
-            <LinkButton :disabled="mobile" to="gilberttraining">Принять участие</LinkButton>
+            <TextButton @click="start">Принять участие</TextButton>
         </div>
 
         <div class="w-full text-neutral-400">
             <ul>
-                <li><RouterLink to="gilbert">Тест Гилберта</RouterLink></li>
-                <li><RouterLink to="calibration">Калибровка</RouterLink></li>           
-                <li><RouterLink to="pallete">Палитра</RouterLink></li>           
-                <li><RouterLink to="picto">Пиктограммы</RouterLink></li>           
-                <li><RouterLink to="ishihara">Тест Ишихары</RouterLink></li>
+                <!-- <li><RouterLink to="gilberttraining">Тренировочный тест Гилберта</RouterLink></li> -->
+                <!-- <li><RouterLink to="gilbert">Тест Гилберта</RouterLink></li> -->
+
+                <!-- <li><RouterLink to="stroop">Тренировочный тест Струпа</RouterLink></li>
                 <li><RouterLink to="stroop">Тест Струпа</RouterLink></li>
 
+                <li><RouterLink to="ishihara">Тест Ишихары</RouterLink></li>
+
+                <li><RouterLink to="ishihara">Страница статистики</RouterLink></li>
+
+                <li><RouterLink to="pallete">Палитра</RouterLink></li>           
+                <li><RouterLink to="picto">Пиктограммы</RouterLink></li>           
+ -->
             </ul>
         </div>
 
-        <button @click="clear" class="absolute bottom-5 right-5 cursor-pointer text-neutral-500 text-xl">Ψ</button>
+        <button @click="state.createUser()" class="absolute bottom-5 right-5 cursor-pointer text-neutral-500 text-xl">{{ state.code }}</button>
 
     </div>
 </div>
@@ -50,20 +54,21 @@
 </template>
 
 <script setup>
-import {generateRandomQuality, generateRandomAnimale, generateRandomColor} from '../lib/random_string'
 
-import LinkButton from '../components/LinkButton.vue';
+import TextButton from '../components/TextButton.vue';
 
-const mobile = window.browserInfo.mobile
+import useState from "@/state";
+import {useRouter} from "vue-router";
 
+const state = useState()
+const router = useRouter()
 
-const clear = () => {
-
-    let cid = window.localStorage.getItem('cid')
-    let uid = cid + '_' + generateRandomColor() + '_' + generateRandomAnimale()
-    window.localStorage.setItem('uid',uid)
-    window.location.reload()
-
+function start(){
+    if(state.gilbert_traning_passed == 'no'){
+        router.push({name: "gilberttraining"})
+    }else{
+        router.push({name: "gilbert"})
+    }
 }
 
 </script>

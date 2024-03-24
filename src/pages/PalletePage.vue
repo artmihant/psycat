@@ -189,25 +189,19 @@ function delta2(a,b){
 }
 
 
-const cr0 = new Color('color(display-p3 0.9244 0.2464 0.4044)')
+const cr0 = new Color('color(display-p3 0.9111 0.2904 0.3331)')
 
-const cr1 = new Color('color(display-p3 0.9336 0.268 0.2039)')
+const cr1 = new Color('color(display-p3 0.8886 0.2848 0.5066)')
 
-const cr2 = new Color('color(display-p3 0.8913 0.2542 0.571)')
-
-const cr3 = new Color('color(display-p3 0.9316 0.2799 0.1176)')
-const cr4 = new Color('color(display-p3 0.9298 0.2869 0.0417)')
+const cr2 = new Color('color(display-p3 0.907 0.3246 0.0816)')
 
 const dr1 = delta(cr0, cr1) 
 const dr2 = delta(cr0, cr2) 
 
-const dr3 = delta(cr0, cr3) 
-const dr4 = delta(cr0, cr4) 
 
-
-// console.log(
-//     dr1, dr2
-// )
+console.log(
+    dr1, dr2
+)
 
 const cb0 = new Color('color(display-p3 0.0772 0.7146 0.7601)')
 
@@ -215,38 +209,25 @@ const cb1 = new Color('color(display-p3 0.2086 0.6784 0.8873)')
 
 const cb2 = new Color('color(display-p3 0.2336 0.727 0.5989)')
 
-
-const cb3 = new Color('color(display-p3 0.2622 0.6645 0.9147)')
-const cb4 = new Color('color(display-p3 0.2891 0.657 0.9268)')
-
 const db1 = delta(cb0, cb1) 
 const db2 = delta(cb0, cb2) 
-const db3 = delta(cb0, cb3) 
-const db4 = delta(cb0, cb4) 
 
 // console.log(
 //     db1, db2
 // )
 
 
-const cy0 = new Color('color(display-p3 0.9362 0.7218 0.0842)')
+const cy0 = new Color('color(display-p3 0.8675 0.7351 0.0446)')
 
-const cy1 = new Color('color(display-p3 0.8169 0.7855 0.1726)') //7
-
-const cy2 = new Color('color(display-p3 0.9805 0.6286 0.1624)') 
-
-
-const cy3 = new Color('color(display-p3 0.9985 0.6455 0.1872)')
-const cy4 = new Color('color(display-p3 0.7553 0.8107 0.2471)')
+const cy1 = new Color('color(display-p3 0.9686 0.67 0.1156)') //7
+const cy2 = new Color('color(display-p3 0.7347 0.7951 0.2312)')
 
 const dy1 = delta(cy0, cy1) 
 const dy2 = delta(cy0, cy2) 
-const dy3 = delta(cy0, cy3) 
-const dy4 = delta(cy0, cy4) 
 
-console.log(
-    dy1, dy2
-)
+// console.log(
+//     dy1, dy2
+// )
 
 // const cr3 = new Color('color(display-p3 0.9487 0.1226 0.3412)')
 // const cr4 = new Color('color(display-p3 0.9534 0.1301 0.2743)')

@@ -42,18 +42,22 @@ export default defineStore('useState', () => {
 
     }
 
+    
+
+
     async function createUser(){
         const key = generateNiceRandomKey()
 
         let data = {
             datetime: new Date(),
-            code: key.code
+            code: key.code,
+            uid: key.uid,
         }
         
         code.value = key.code
         uid.value = key.uid
 
-        setDoc(doc(db, "users", uid.value), data).then(
+        setDoc(doc(db, "users", `${code.value}:${uid.value}`), data).then(
             () => {
                 window.localStorage.setItem('code', key.code)
                 window.localStorage.setItem('uid', key.uid)
@@ -73,11 +77,9 @@ export default defineStore('useState', () => {
     const stroop_test_passed = ref('no')
     const ishihara_test_passed = ref('no')
 
-
     function saveGilbertTest(gilbert_test_results: Series[]){
 
-
-        updateDoc(doc(db, 'users', uid.value), {
+        updateDoc(doc(db, 'users', `${code.value}:${uid.value}`), {
             gilbert_test_passed: 'yes',
             gilbert_test_results: gilbert_test_results
         }).then(() => {
@@ -91,9 +93,7 @@ export default defineStore('useState', () => {
 
     function saveStroopTest(stroop_test_results: Series[]){
 
-
-
-        updateDoc(doc(db, 'users', uid.value), {
+        updateDoc(doc(db, 'users', `${code.value}:${uid.value}`), {
             stroop_test_passed: 'yes',
             stroop_test_results: stroop_test_results
         }).then(() => {       
@@ -104,7 +104,7 @@ export default defineStore('useState', () => {
 
     function saveIshiharaTest(ishihara_test_results: Series[]){
 
-        updateDoc(doc(db, 'users', uid.value), {
+        updateDoc(doc(db, 'users', `${code.value}:${uid.value}`), {
             ishihara_test_passed: 'yes',
             ishihara_test_results: ishihara_test_results
         }).then(() => {       

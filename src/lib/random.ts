@@ -13,7 +13,7 @@ export function generateNiceRandomKey(){
             (r2 < 10 ? `0${r2}` : `${r2}`) + 
             (r3 < 10 ? `0${r3}` : `${r3}`)
 
-    const uid = `${code}:` + qualities[r1] + '_' + colors[r2] + '_' + animals[r3]
+    const uid = qualities[r1] + '_' + colors[r2] + '_' + animals[r3]
 
     return {code, uid}
 }

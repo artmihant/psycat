@@ -1,18 +1,16 @@
 <template>
 
-    <div class="h-screen flex w-full justify-center">
+    <div class="h-screen flex w-full justify-center" :style="{'background-color':'#fff'}">
         <div v-show="game_status=='play' && left_block.vision && false" 
-            class="lg:w-40 md:w-24 sm:w-16 w-12 "
-
-            :style="{
+            class="lg:w-40 md:w-24 sm:w-16 w-12" :style="{
                 'background-color':left_block.color,
-                }">
+            }"
+        >
         </div> 
 
         <div v-show="game_status=='init'" class="h-screen justify-center flex flex-col flex-1"> 
             <div class="mt-3 text-center">
-                <p>Вы прошли тренировочный тест! А сейчас начнется настоящее испытание.</p>
-                <p>Напомним правила.</p>
+
                 <p> В этом тесте вам будут показывать слова, обозначающие цвета.</p>
                 <p> Если слово и его цвет совпадают, нажмите стрелку <b>◄влево◄</b></p>
                 <p> Если слово и его цвет различаются, нажмите стрелку <b>►вправо►</b></p>
@@ -97,14 +95,7 @@
             </table>
 
             <div class="mt-3 text-center font-bold">
-                <template v-if="user.gilbert">
-                    <LinkButton to="gilbert" >Далее</LinkButton>
-                </template>
-                <template v-else>
-                    <div class="mt-3 text-center font-bold">
-                        <LinkButton to="gilberttraining" >Далее</LinkButton>
-                    </div>
-                </template>
+                <router-link to="ishihara"><TextButton>Далее</TextButton></router-link>
             </div>
         </div>
 
@@ -113,21 +104,18 @@
 </template>
 
 
-<script setup>
-import { useDocument, useCollection} from 'vuefire'
-import {collection, doc, getDoc, addDoc, updateDoc} from 'firebase/firestore'
+<script setup lang="ts">
+
 import {inject, ref, reactive, computed} from 'vue'
-import LinkButton from '../components/LinkButton.vue';
-import {db} from '../firebase.js'
-const uid = inject('uid')
 
-const user = (await getDoc(doc(db, 'users', uid))).data()
-
+import TextButton from '../components/TextButton.vue';
+import useState from "@/state";
 
 function randomInt(max) {
     return Math.floor(Math.random() * max);
 }
 
+const state = useState()
 const game_status = ref('init')
 
 const pallete = [
@@ -137,30 +125,30 @@ const pallete = [
 ]
 
 let stimulus_seq = [
-         {'first_color': 2, 'second_color': 1, 'congruents': 0, 'direction': 1} ,
-         {'first_color': 1, 'second_color': 0, 'congruents': 0, 'direction': 1} ,
-         {'first_color': 2, 'second_color': 1, 'congruents': 0, 'direction': 1} ,
-         {'first_color': 1, 'second_color': 2, 'congruents': 0, 'direction': 1} ,
-         {'first_color': 0, 'second_color': 1, 'congruents': 1, 'direction': 0} ,
-         {'first_color': 0, 'second_color': 2, 'congruents': 0, 'direction': 1} ,
-         {'first_color': 1, 'second_color': 2, 'congruents': 1, 'direction': 0} ,
-         {'first_color': 0, 'second_color': 1, 'congruents': 0, 'direction': 1} ,
-         {'first_color': 1, 'second_color': 0, 'congruents': 1, 'direction': 0} ,
-         {'first_color': 1, 'second_color': 2, 'congruents': 1, 'direction': 0} ,
-         {'first_color': 1, 'second_color': 2, 'congruents': 0, 'direction': 1} ,
-         {'first_color': 0, 'second_color': 2, 'congruents': 1, 'direction': 0} ,
-         {'first_color': 0, 'second_color': 2, 'congruents': 0, 'direction': 1} ,
-         {'first_color': 0, 'second_color': 1, 'congruents': 0, 'direction': 1} ,
-         {'first_color': 2, 'second_color': 0, 'congruents': 0, 'direction': 1} ,
-         {'first_color': 1, 'second_color': 0, 'congruents': 1, 'direction': 0} ,
-         {'first_color': 2, 'second_color': 1, 'congruents': 1, 'direction': 0} ,
-         {'first_color': 2, 'second_color': 0, 'congruents': 1, 'direction': 0} ,
-         {'first_color': 2, 'second_color': 0, 'congruents': 1, 'direction': 0} ,
-         {'first_color': 2, 'second_color': 0, 'congruents': 0, 'direction': 1} ,
-         {'first_color': 1, 'second_color': 0, 'congruents': 0, 'direction': 1} ,
-         {'first_color': 2, 'second_color': 1, 'congruents': 1, 'direction': 0} ,
-         {'first_color': 0, 'second_color': 2, 'congruents': 1, 'direction': 0} ,
-         {'first_color': 0, 'second_color': 1, 'congruents': 1, 'direction': 0} ,
+    {'first_color': 2, 'second_color': 1, 'congruents': 0, 'direction': 1},
+    {'first_color': 1, 'second_color': 0, 'congruents': 0, 'direction': 1},
+    {'first_color': 2, 'second_color': 1, 'congruents': 0, 'direction': 1},
+    {'first_color': 1, 'second_color': 2, 'congruents': 0, 'direction': 1},
+    {'first_color': 0, 'second_color': 1, 'congruents': 1, 'direction': 0},
+    {'first_color': 0, 'second_color': 2, 'congruents': 0, 'direction': 1},
+    {'first_color': 1, 'second_color': 2, 'congruents': 1, 'direction': 0},
+    {'first_color': 0, 'second_color': 1, 'congruents': 0, 'direction': 1},
+    {'first_color': 1, 'second_color': 0, 'congruents': 1, 'direction': 0},
+    {'first_color': 1, 'second_color': 2, 'congruents': 1, 'direction': 0},
+    {'first_color': 1, 'second_color': 2, 'congruents': 0, 'direction': 1},
+    {'first_color': 0, 'second_color': 2, 'congruents': 1, 'direction': 0},
+    {'first_color': 0, 'second_color': 2, 'congruents': 0, 'direction': 1},
+    {'first_color': 0, 'second_color': 1, 'congruents': 0, 'direction': 1},
+    {'first_color': 2, 'second_color': 0, 'congruents': 0, 'direction': 1},
+    {'first_color': 1, 'second_color': 0, 'congruents': 1, 'direction': 0},
+    {'first_color': 2, 'second_color': 1, 'congruents': 1, 'direction': 0},
+    {'first_color': 2, 'second_color': 0, 'congruents': 1, 'direction': 0},
+    {'first_color': 2, 'second_color': 0, 'congruents': 1, 'direction': 0},
+    {'first_color': 2, 'second_color': 0, 'congruents': 0, 'direction': 1},
+    {'first_color': 1, 'second_color': 0, 'congruents': 0, 'direction': 1},
+    {'first_color': 2, 'second_color': 1, 'congruents': 1, 'direction': 0},
+    {'first_color': 0, 'second_color': 2, 'congruents': 1, 'direction': 0},
+    {'first_color': 0, 'second_color': 1, 'congruents': 1, 'direction': 0},
 ]
 
 stimulus_seq.sort(() => Math.random() - 0.5)
@@ -213,7 +201,7 @@ const left_block = reactive({
 })
 
 
-const results_pool = reactive(user.stroop ? user.stroop : [])
+const results_pool = reactive([])
 
 if(results_pool.length){
     game_status.value = 'score'
@@ -351,13 +339,12 @@ let turn = () => {
             document.addEventListener("keyup", keyup);
         }
 
-
-
         document.addEventListener("keydown", keydown);
+
     }
     else{
 
-        updateDoc(doc(db, 'users', uid), {stroop:results_pool})
+        state.saveStroopTest(results_pool)
 
         game_status.value = 'score'
     }

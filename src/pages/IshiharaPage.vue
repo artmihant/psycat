@@ -1,6 +1,6 @@
 <template>
 
-    <div class="p-4 w-screen md:min-h-screen flex items-center justify-center">
+    <div class="p-4 w-screen md:min-h-screen flex items-center justify-center"  :style="{'background-color':'#fff'}">
         <div class="w-fit h-fit" v-show="!showTable">
             <div>
                 <h1>Тест Ишихары</h1>
@@ -58,16 +58,10 @@
                    <td class="pr-3 border border-neutral-700 text-center">{{answer.userAnswer == answer.value ? '✔' : '❌'}}</td>
                 </tr>
             </table>
-            <template v-if="user.stroop">
-                <div class="mt-3 text-center font-bold">
-                    <LinkButton to="stroop" >Далее</LinkButton>
-                </div>
-            </template>
-            <template v-else>
-                <div class="mt-3 text-center font-bold">
-                    <LinkButton to="strooptraining" >Далее</LinkButton>
-                </div>
-            </template>
+
+            <div class="mt-3 text-center font-bold">
+                <router-link to="thanks"><TextButton>Далее</TextButton></router-link>
+            </div>
 
         </div>
 
@@ -76,21 +70,18 @@
 
 </template>
 
-<script setup>
-
-import {doc, getDoc, updateDoc} from 'firebase/firestore'
+<script setup lang="ts">
 
 import {inject, computed, ref,reactive} from "vue";
-import {db} from '../firebase.js'
 
-import LinkButton from '../components/LinkButton.vue';
+import useState from "@/state";
+import TextButton from '../components/TextButton.vue';
+
+const state = useState()
+
 const numberbuttons = [
     1,2,3,4,5,6,7,8,9
 ]
-
-const uid = inject('uid')
-
-const user = (await getDoc(doc(db, 'users', uid))).data()
 
 
 const images = ref([
@@ -123,7 +114,7 @@ images.value.sort(() => Math.random() - 0.5)
 
 const showTable = ref(false)
 
-const answers = reactive(user.ishihara ? user.ishihara : [])
+const answers = reactive([])
 
 if(answers.length){
     showTable.value = true
@@ -142,7 +133,7 @@ function takeAnswer(e) {
     images.value.splice(0, 1)
     if (images.value.length === 0) {
 
-        updateDoc(doc(db, 'users', uid), {ishihara:answers})
+        state.saveIshiharaTest(answers)
 
         showTable.value = true
     }

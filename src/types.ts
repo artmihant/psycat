@@ -17,4 +17,14 @@ export type Series = {
     figure: string,
     ground: string,
     target: string,
+    length: number,
+    max_error_count: number,
+}
+
+export type Program = {
+    figure: string,
+    ground: string,
+    target: string,
+    length: number,
+    max_error_count: number,
 }

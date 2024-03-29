@@ -30,7 +30,6 @@
 
         <div class="w-full text-neutral-400">
             <ul>
-                <!-- <li><RouterLink to="gilberttraining">Тренировочный тест Гилберта</RouterLink></li> -->
                 <!-- <li><RouterLink to="gilbert">Тест Гилберта</RouterLink></li> -->
 
                 <!-- <li><RouterLink to="stroop">Тренировочный тест Струпа</RouterLink></li>
@@ -46,7 +45,7 @@
             </ul>
         </div>
 
-        <button @click="state.createUser()" class="absolute bottom-5 right-5 cursor-pointer text-neutral-500 text-xl">{{ state.code }}</button>
+        <button @click="state.createUser()" class="absolute bottom-5 right-5 cursor-pointer text-neutral-500 text-xl">↻{{ state.code }}</button>
 
     </div>
 </div>
@@ -56,7 +55,7 @@
 <script setup>
 
 import TextButton from '../components/TextButton.vue';
-
+import fullScreen from "@/lib/fullscreen"
 import useState from "@/state";
 import {useRouter} from "vue-router";
 
@@ -64,10 +63,15 @@ const state = useState()
 const router = useRouter()
 
 function start(){
-    if(state.gilbert_traning_passed == 'no'){
-        router.push({name: "gilberttraining"})
-    }else{
+    fullScreen();
+    if(state.gilbert_test_passed == 'no'){
         router.push({name: "gilbert"})
+    }else if(state.stroop_test_passed == 'no'){
+        router.push({name: "stroop"})
+    }else if(state.ishihara_test_passed == 'no'){
+        router.push({name: "ishihara"})
+    }else{
+        router.push({name: "ishihara"})
     }
 }
 

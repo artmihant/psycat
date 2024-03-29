@@ -8,7 +8,7 @@ import useState from "@/state";
 
 const state = useState()
 
-state.start()
+state.init()
 
 </script>
  

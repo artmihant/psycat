@@ -22,16 +22,6 @@ const routes = [
         component: () => import('./pages/StroopPage.vue'),
     },
     {
-        path: '/strooptraining',
-        name: 'strooptraining',
-        component: () => import('./pages/StroopTrainingPage.vue'),
-    },
-    {
-        path: '/gilberttraining',
-        name: 'gilberttraining',
-        component: () => import('./pages/GilbertTrainingPage.vue'),
-    },
-    {
         path: '/gilbert',
         name: 'gilbert',
         component: () => import('./pages/GilbertPage.vue'),

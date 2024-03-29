@@ -1,0 +1,1 @@
+function n(){var e=document.body,l=e.requestFullScreen||e.webkitRequestFullScreen||e.mozRequestFullScreen||e.msRequestFullScreen;if(l)l.call(e);else if(typeof window.ActiveXObject<"u"){var t=new ActiveXObject("WScript.Shell");t!==null&&t.SendKeys("{F11}")}}export{n as f};

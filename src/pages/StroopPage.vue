@@ -17,10 +17,10 @@
                 
                 <p> Например:</p>
                 <p>
-                <span class="text-red-600 font-bold">красный</span> — влево ◄
+                <span class="text-red-600 font-bold">красный</span> — влево ☛
                 </p>
                 <p>
-                <span class="text-green-600 font-bold">синий</span> — вправо ►
+                <span class="text-green-600 font-bold">синий</span> — вправо ☚
                 </p>
 
                 <p> <b>Постарайтесь выполнить тест как можно быстрее и без ошибок.</b></p>
@@ -220,7 +220,6 @@ let keyup = () => {
 }
 
 let start_game = () =>{
-    document.documentElement.requestFullscreen();
     document.removeEventListener("keyup", start_game);
 
     tests_passed = 0

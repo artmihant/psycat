@@ -183,19 +183,19 @@ let offset = ref(0)
 
 const center_block = reactive({
     title: '',
-    color: 0,
+    color: '',
     vision: true,
     colorize: true
 })
 
 const right_block = reactive({
-    color: 0,
+    color: '',
     vision: true,
     colorize: true
 })
 
 const left_block = reactive({
-    color: 0,
+    color: '',
     vision: true,
     colorize: true
 })

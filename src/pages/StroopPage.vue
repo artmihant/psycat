@@ -110,6 +110,7 @@ import {inject, ref, reactive, computed} from 'vue'
 
 import TextButton from '../components/TextButton.vue';
 import useState from "@/state";
+import fullScreen from '@/lib/fullscreen';
 
 function randomInt(max) {
     return Math.floor(Math.random() * max);
@@ -220,6 +221,7 @@ let keyup = () => {
 }
 
 let start_game = () =>{
+    fullScreen();
     document.removeEventListener("keyup", start_game);
 
     tests_passed = 0

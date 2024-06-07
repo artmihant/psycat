@@ -181,7 +181,7 @@ palletes['magentaOK'] = genGradPallete([
 ], N, {space: "oklch", delta: "OK"})
 
 function delta(a,b){
-    return Color.deltaE(a, b, "OK")*100
+    return Color.deltaE(a, b, "76")
 }
 
 function delta2(a,b){
@@ -192,7 +192,6 @@ function delta2(a,b){
 const cr0 = new Color('color(display-p3 0.9111 0.2904 0.3331)')
 
 const cr1 = new Color('color(display-p3 0.8886 0.2848 0.5066)')
-
 const cr2 = new Color('color(display-p3 0.907 0.3246 0.0816)')
 
 const dr1 = delta(cr0, cr1) 
@@ -203,19 +202,6 @@ console.log(
     dr1, dr2
 )
 
-const cb0 = new Color('color(display-p3 0.0772 0.7146 0.7601)')
-
-const cb1 = new Color('color(display-p3 0.2086 0.6784 0.8873)')
-
-const cb2 = new Color('color(display-p3 0.2336 0.727 0.5989)')
-
-const db1 = delta(cb0, cb1) 
-const db2 = delta(cb0, cb2) 
-
-// console.log(
-//     db1, db2
-// )
-
 
 const cy0 = new Color('color(display-p3 0.8675 0.7351 0.0446)')
 
@@ -225,9 +211,24 @@ const cy2 = new Color('color(display-p3 0.7347 0.7951 0.2312)')
 const dy1 = delta(cy0, cy1) 
 const dy2 = delta(cy0, cy2) 
 
-// console.log(
-//     dy1, dy2
-// )
+console.log(
+    dy1, dy2
+)
+
+
+const cb0 = new Color('color(display-p3 0.0772 0.7146 0.7601)')
+
+const cb1 = new Color('color(display-p3 0.2086 0.6784 0.8873)')
+
+const cb2 = new Color('color(display-p3 0.2336 0.727 0.5989)')
+
+const db1 = delta(cb0, cb1) 
+const db2 = delta(cb0, cb2) 
+
+console.log(
+    db1, db2
+)
+
 
 // const cr3 = new Color('color(display-p3 0.9487 0.1226 0.3412)')
 // const cr4 = new Color('color(display-p3 0.9534 0.1301 0.2743)')
@@ -241,14 +242,10 @@ const dy2 = delta(cy0, cy2)
 
 
 
-
-
-
-
-// const cp1 = new Color('color(display-p3 0.8902 0.2467 0.5919)')
-// const cp2 = new Color('color(display-p3 0.9338 0.237 0.3626)')
-// const cp3 = new Color('color(display-p3 0.9352 0.2775 0.0037)')
-// const cp4 = new Color('color(display-p3 0.9276 0.2347 0.4178)')
+const cp1 = new Color('color(display-p3 0.8902 0.2467 0.5919)')
+const cp2 = new Color('color(display-p3 0.9338 0.237 0.3626)')
+const cp3 = new Color('color(display-p3 0.9352 0.2775 0.0037)')
+const cp4 = new Color('color(display-p3 0.9276 0.2347 0.4178)')
 
 // console.log(
 //     Color.deltaE(cp1, cp2, "2000"),
